@@ -1,106 +1,265 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casa Music – Catálogo</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-<style>
-body {
-	font-family: 'Inter', sans-serif;
-	background-color: #0d0d0d;
-	color: #fff;
-	margin: 0;
-	padding: 20px;
-}
-.nav {
-	display: flex;
-	gap: 20px;
-	background-color: #1a1a1a;
-	padding: 10px 20px;
-	border-radius: 10px;
-	margin-bottom: 20px;
-}
-.nav a {
-	color: #00fff0;
-	text-decoration: none;
-	cursor: pointer;
-	font-weight: bold;
-}
-.nav a:hover { text-decoration: underline; }
-#catalogo { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-.card {
-	background: #1a1a1a;
-	border-radius: 16px;
-	padding: 10px;
-	width: 180px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-	text-align: center;
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	overflow: hidden;
-	transition: transform 0.3s;
-}
-.card img {
-	width: 100%;
-	height: 180px;
-	object-fit: cover;
-	border-radius: 12px;
-	border: 2px solid #00FFFF;
-	display: block;
-	cursor: pointer;
-	transition: opacity 0.3s;
-	max-width: 100%;
-}
-.card h2 { margin: 10px 0 2px; font-size: 16px; color: #ffffff; }
-.card p { font-size: 12px; color: #aaaaaa; margin: 0 0 6px; }
-.card a.download-link {
-	margin-top: 8px;
-	color: #00fff0;
-	font-size: 13px;
-	text-decoration: none;
-	font-weight: bold;
-	cursor: pointer;
-}
-.card a.download-link:hover { text-decoration: underline; }
-/* Puedes dejar aquí todo el resto de tu CSS, igual que lo tienes */
-</style>
-</head>
-<body>
-<div class="nav">
-	<a href="#">Inicio</a>
-	<a href="#">Catálogo</a>
-	<a href="#">Licencias</a>
-	<a href="#">Contacto</a>
-</div>
-<div id="catalogo"></div>
-
-<!-- Script PapaParse para cargar canciones -->
-<script>
-const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSaml4sMmV59VPP9Cc25ZKitHWRjyxiOvExUrouRMDN4ZiA40QHbBGWrUv4xDJY5KOvujH2Cq-Dr1vf/pub?gid=842801860&single=true&output=csv";
-
-Papa.parse(csvUrl, {
-    download: true,
-    header: true,
-    complete: function(results) {
-        const data = results.data;
-        let html = '';
-        data.forEach(song => {
-            // Ajusta estos nombres si tus columnas tienen nombres diferentes
-            html += `
-                <div class="card">
-                    <img src="${song['URL Portada'] || 'https://via.placeholder.com/180x180.png?text=Cover'}" alt="${song['Titulo'] || 'Sin título'}">
-                    <h2>${song['Titulo'] || 'Sin título'}</h2>
-                    <p>${song['Artista'] || ''}</p>
-                    <a class="download-link" href="${song['URL Audio WAV Para Descarga'] || '#'}" target="_blank">Descargar</a>
-                </div>
-            `;
-        });
-        document.getElementById('catalogo').innerHTML = html;
-    }
-});
-</script>
-</body>
-</html>
+<!DOCTYPE html>																					
+<html lang="es">																					
+<head>																					
+<meta charset="UTF-8">																					
+<title>Casa Music – Catálogo</title>																					
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">																					
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>																					
+<style>																					
+body {																					
+	font-family: 'Inter', sans-serif;																				
+	background-color: #0d0d0d;																				
+	color: #fff;																				
+	margin: 0;																				
+	padding: 20px;																				
+}																					
+.nav { display: flex; gap: 20px; background-color: #1a1a1a; padding: 10px 20px; border-radius: 10px; margin-bottom: 20px; }																					
+.nav a { color: #00fff0; text-decoration: none; cursor: pointer; font-weight: bold; }																					
+.nav a:hover { text-decoration: underline; }																					
+.tab-content { display: none; }																					
+.tab-content.active { display: block; }																					
+.header { display: flex; align-items: center; justify-content: flex-start; margin-bottom: 20px; }																					
+.header img { height: 100px; }																					
+input[type="text"], input[type="email"] { width: 100%; max-width: 500px; margin: 0 auto 20px; display: block; padding: 12px 16px; font-size: 16px; border-radius: 30px; border: 2px solid #00FFFF; background-color: #2a2a2a; color: #fff; }																					
+.filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 30px; }																					
+.tag-btn { background: #2d2d2d; color: #fff; border: 1px solid #444; border-radius: 20px; padding: 6px 14px; cursor: pointer; font-size: 13px; transition: all 0.3s ease; }																					
+.tag-btn:hover, .tag-btn.active { background-color: #00b4d8; }																					
+#catalogo { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }																					
+.card { background: #1a1a1a; border-radius: 16px; padding: 10px; width: 180px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); text-align: center; display: flex; flex-direction: column; position: relative; overflow: hidden; transition: transform 0.3s; }																					
+.card.playing { box-shadow: 0 0 12px 3px #00ffff80; transform: scale(1.05); }																					
+.card img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; border: 2px solid #00FFFF; display: block; cursor: pointer; transition: opacity 0.3s; }																					
+.card.playing img { opacity: 0.5; }																					
+.card h2 { margin: 10px 0 2px; font-size: 16px; color: #ffffff; }																					
+.card p { font-size: 12px; color: #aaaaaa; margin: 0 0 6px; }																					
+.card a.download-link { margin-top: 8px; color: #00fff0; font-size: 13px; text-decoration: none; font-weight: bold; cursor: pointer; }																					
+.card a.download-link:hover { text-decoration: underline; }																					
+#popupAviso {																					
+	display: none;																				
+	position: fixed;																				
+	top: 50%;																				
+	left: 50%;																				
+	transform: translate(-50%, -50%);																				
+	background: #1a1a1a;																				
+	border: 2px solid #00fff0;																				
+	padding: 20px;																				
+	border-radius: 12px;																				
+	width: 90%;																				
+	max-width: 500px;																				
+	z-index: 1000;																				
+	color: #fff;																				
+}																					
+#popupAviso input[type="checkbox"] { margin-right: 10px; }																					
+</style>																					
+</head>																					
+<body>																					
+<div class="nav">																					
+	<a onclick="mostrarSeccion('inicio')">Inicio</a>																				
+	<a onclick="mostrarSeccion('licencias')">Licencias</a>																				
+	<a onclick="mostrarSeccion('contacto')">Contacto</a>																				
+</div>																					
+<div id="inicio" class="tab-content active">																					
+	<div class="header">																				
+		<a href="#" onclick="recargarInicio(event)"><img src="https://catalogo.nyc3.digitaloceanspaces.com/ImagenesPagina/LOGO%20PAGINA.png" alt="Casa Music logo"></a>																			
+	</div>																				
+	<input type="text" id="busqueda" placeholder="Buscar música..." oninput="buscarCanciones()">																				
+	<div class="filters">																				
+		<button class="tag-btn" onclick="filtrarPorGenero('Lo-Fi')">Lo-Fi</button>																			
+		<button class="tag-btn" onclick="filtrarPorGenero('Sleep')">Sleep</button>																			
+		<button class="tag-btn" onclick="filtrarPorGenero('Ambient')">Ambient</button>																			
+		<button class="tag-btn" onclick="filtrarPorGenero('Phonk')">Phonk</button>																			
+		<button class="tag-btn" onclick="filtrarPorGenero('House')">House</button>																			
+		<button class="tag-btn" onclick="filtrarPorGenero('Dark Ambient')">Dark Ambient</button>																			
+	</div>																				
+	<div id="catalogo"></div>																				
+</div>																					
+<div id="licencias" class="tab-content">																					
+<h1 style="color:#00fff0;margin-bottom:14px;">Licencias</h1>																					
+<section style="max-width:700px;margin:0 auto;line-height:1.7;">																					
+<h2 style="color:#00d4ff;font-size:20px;">Términos y Condiciones de Uso de Licencias – Casa Music.io</h2>																					
+<div style="color:#bbbbbb;font-size:13px;margin-bottom:14px;">																					
+Última actualización: <b>20 de mayo de 2025</b>																					
+</div>																					
+																					
+<p>Este documento establece los términos y condiciones bajo los cuales se autoriza el uso del contenido musical disponible en Casa Music.io (en adelante, "Casa Music") por parte de creadores de contenido, youtubers, streamers, marcas y otros usuarios digitales.</p>																					
+																					
+<ol style="margin-left:22px;">																					
+<li>																					
+<b>Concesión de Licencia</b>																					
+<p>Casa Music otorga a los usuarios registrados una licencia limitada, no exclusiva, revocable e intransferible para usar la música disponible en su catálogo, exclusivamente en proyectos audiovisuales, canales de YouTube, transmisiones en vivo, redes sociales o plataformas similares, siempre y cuando se cumplan los requisitos establecidos en este contrato.</p>																					
+</li>																					
+<li>																					
+<b>Requisitos Obligatorios para el Uso de la Música</b>																					
+<ul style="list-style-type: disc; margin-left: 18px;">																					
+<li>																					
+<b>2.1 Registro obligatorio</b><br>																					
+Es obligatorio que el usuario complete correctamente el formulario de registro oficial disponible en Casa Music.io o directamente en el siguiente enlace:<br>																					
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSdps8X0qeIWNxvOp60yaVzQmIVQrosYpixweUYlZc7LTOrtyA/viewform?usp=dialog" target="_blank" style="color:#00fff0;text-decoration:underline;">🔗 Formulario de registro</a><br>																					
+Una vez enviado, el canal o cuenta será evaluada e incluida en la lista blanca (whitelist) en un plazo estimado de 2 a 3 días hábiles.																					
+</li>																					
+<li>																					
+<b>2.2 Créditos obligatorios</b><br>																					
+En la descripción de cada video o contenido publicado que utilice música licenciada de Casa Music, el usuario deberá incluir obligatoriamente los siguientes créditos:																					
+<ul style="margin-top:7px;">																					
+<li>Música licenciada por: <b>Casa Music.io</b></li>																					
+<li>Artista: <i>[Nombre del artista]</i></li>																					
+<li>Álbum o EP: <i>[Título del disco]</i></li>																					
+</ul>																					
+<span style="color:#ff8080;">La omisión de los créditos obligatorios puede resultar en la revocación inmediata de la licencia y el retiro de la cuenta de la lista blanca.</span>																					
+</li>																					
+</ul>																					
+</li>																					
+<li>																					
+<b>Restricciones de Uso</b>																					
+<ul style="list-style-type: disc; margin-left: 18px;">																					
+<li>Reutilizar o revender la música como contenido independiente (por ejemplo, subirla a plataformas de streaming, venderla como NFT, o distribuirla como si fuera propia).</li>																					
+<li>Usar la música para contenido que infrinja normas legales o morales, como violencia explícita, discursos de odio, racismo, xenofobia o contenido sexual sin moderación.</li>																					
+<li>Usar la música sin haber sido previamente registrado o sin haber incluido los créditos correspondientes.</li>																					
+</ul>																					
+</li>																					
+<li>																					
+<b>Modificación y Cancelación de la Licencia</b>																					
+<p>Casa Music se reserva el derecho de modificar estos términos en cualquier momento. En caso de incumplimiento por parte del usuario, la licencia podrá ser revocada de forma inmediata, sin previo aviso.</p>																					
+</li>																					
+<li>																					
+<b>Contacto y Soporte</b>																					
+<p>Para cualquier duda, aclaración o soporte relacionado con el uso de las licencias o el proceso de registro, por favor escribe a:</p>																					
+<div style="font-weight:bold; color:#00fff0;">📧 casaazulrecord@gmail.com</div>																					
+</li>																					
+<li>																					
+<b>Aceptación de los Términos</b>																					
+<p>Al usar cualquier canción o contenido del catálogo de Casa Music, el usuario acepta de manera explícita todos los términos y condiciones aquí establecidos.</p>																					
+</li>																					
+</ol>																					
+</section>																					
+</div>																					
+																					
+</div>																					
+<div id="contacto" class="tab-content">																					
+	<h1>Contacto</h1>																				
+	<p>Escríbenos a contacto@casamusic.com</p>																				
+</div>																					
+<div id="popupAviso">																					
+	<p><strong>⚠️ ATENCIÓN:</strong> Evita infracciones en tu canal de YouTube.</p>																				
+	<p>Para evitar reclamaciones de derechos de autor por parte de YouTube al usar nuestras canciones, es indispensable que sigas estos pasos:</p>																				
+	<ul>																				
+		<li>Da crédito correctamente al título de la canción y al artista correspondiente en la descripción de tu video o contenido.</li>																			
+		<li>Llena nuestro <a href="https://docs.google.com/forms/d/e/1FAIpQLSdps8X0qeIWNxvOp60yaVzQmIVQrosYpixweUYlZc7LTOrtyA/viewform?usp=dialog" target="_blank" style="color:#00fff0">formulario de uso</a> para registrar tu canal y permitirnos incluirlo en la lista blanca (whitelist).</li>																			
+		<li>Este proceso nos permite autorizar tu canal de forma oficial ante las plataformas y así evitar bloqueos, silencios o monetización por terceros.</li>																			
+	</ul>																				
+	<p>Si tienes dudas, contáctanos a: contacto@casamusic.com</p>																				
+	<label><input type="checkbox" id="aceptaCondiciones"> Listo, Acepto las condiciones y estoy listo para usar el audio.</label>																				
+</div>																					
+<script>																					
+let canciones = [], audioActual = null, cardActual = null, descargaActiva = null;																					
+																					
+function mostrarSeccion(id) {																					
+	document.querySelectorAll('.tab-content').forEach(sec => sec.classList.remove('active'));																				
+	document.getElementById(id).classList.add('active');																				
+}																					
+																					
+function recargarInicio(e) {																					
+	if (e) e.preventDefault();																				
+	document.getElementById('busqueda').value = '';																				
+	document.querySelectorAll('.tab-content').forEach(sec => sec.classList.remove('active'));																				
+	document.getElementById('inicio').classList.add('active');																				
+	mostrarAleatorias();																				
+}																					
+																					
+async function cargarCanciones() {																					
+	try {																				
+		const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSaml4sMmV59VPP9Cc25ZKitHWRjyxiOvExUrouRMDN4ZiA40QHbBGWrUv4xDJY5KOvujH2Cq-Dr1vf/pub?gid=842801860&single=true&output=csv';																			
+		const response = await fetch(url);																			
+		const csv = await response.text();																			
+		const data = Papa.parse(csv, { header: true }).data;																			
+		canciones = data.filter(c => c['Titulo'] && c['URL Audio MP3 Para Reproduccion']);																			
+		mostrarAleatorias();																			
+	} catch (error) {																				
+		console.error('Error cargando canciones:', error);																			
+		document.getElementById('catalogo').innerHTML = '<p style="text-align:center; color:red;">No se pudo cargar el catálogo.</p>';																			
+	}																				
+}																					
+																					
+function mostrarAleatorias() {																					
+	const seleccionadas = canciones.sort(() => 0.5 - Math.random()).slice(0, 9);																				
+	renderizarCatalogo(seleccionadas);																				
+}																					
+																					
+function filtrarPorGenero(genero) {																					
+	const filtradas = canciones.filter(c =>																				
+		c['Genero Principal']?.toLowerCase().includes(genero.toLowerCase()) ||																			
+		c['Genero 2']?.toLowerCase().includes(genero.toLowerCase())																			
+	);																				
+	renderizarCatalogo(filtradas);																				
+}																					
+																					
+function buscarCanciones() {																					
+	const termino = document.getElementById('busqueda').value.toLowerCase();																				
+	if (!termino.trim()) return mostrarAleatorias();																				
+	const filtradas = canciones.filter(c =>																				
+		c['Titulo']?.toLowerCase().includes(termino) ||																			
+		c['Artista']?.toLowerCase().includes(termino) ||																			
+		c['Genero Principal']?.toLowerCase().includes(termino) ||																			
+		c['Genero 2']?.toLowerCase().includes(termino)																			
+	);																				
+	renderizarCatalogo(filtradas);																				
+}																					
+																					
+function renderizarCatalogo(lista) {																					
+	const catalogo = document.getElementById('catalogo');																				
+	catalogo.innerHTML = '';																				
+	lista.forEach(cancion => {																				
+		const card = document.createElement('div');																			
+		card.className = 'card';																			
+		const audioId = 'audio_' + Math.random().toString(36).substr(2, 9);																			
+		const downloadLink = cancion['URL Audio WAV Para Descarga'];																			
+		card.innerHTML = `																			
+			<img src="${cancion['URL Portada'] || 'https://via.placeholder.com/180'}" alt="${cancion['Titulo']}" onclick="reproducirAudio('${audioId}', this)">																		
+			<h2>${cancion['Titulo']}</h2>																		
+			<p>${cancion['Artista']}</p>																		
+			<audio id="${audioId}" src="${downloadLink}"></audio>																		
+			<a href="#" class="download-link" onclick="pedirDatos(event, '${downloadLink}')">Descarga</a>																		
+		`;																			
+		catalogo.appendChild(card);																			
+	});																				
+}																					
+																					
+function reproducirAudio(id, imgEl) {																					
+	const audio = document.getElementById(id);																				
+	const card = imgEl.closest('.card');																				
+	if (audioActual && audioActual !== audio) {																				
+		audioActual.pause();																			
+		audioActual.currentTime = 0;																			
+		if (cardActual) cardActual.classList.remove('playing');																			
+	}																				
+	if (audio.paused) {																				
+		audio.play();																			
+		card.classList.add('playing');																			
+		audioActual = audio;																			
+		cardActual = card;																			
+	} else {																				
+		audio.pause();																			
+		card.classList.remove('playing');																			
+		audioActual = null;																			
+		cardActual = null;																			
+	}																				
+}																					
+																					
+function pedirDatos(e, urlDescarga) {																					
+	e.preventDefault();																				
+	document.getElementById('popupAviso').style.display = 'block';																				
+	descargaActiva = urlDescarga;																				
+}																					
+																					
+document.addEventListener('change', function(e) {																					
+	if (e.target.id === 'aceptaCondiciones' && e.target.checked && descargaActiva) {																				
+		window.open(descargaActiva, '_blank');																			
+		document.getElementById('popupAviso').style.display = 'none';																			
+		e.target.checked = false;																			
+		descargaActiva = null;																			
+	}																				
+});																					
+																					
+cargarCanciones();																					
+</script>																					
+</body>																					
+</html>																					
