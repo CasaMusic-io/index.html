@@ -1,39 +1,39 @@
-<!DOCTYPE html>	
-<html lang="es">	
-<head>	
-<meta charset="UTF-8">	
-<meta name="viewport" content="width=device-width, initial-scale=1">	
-<title>Casa Music – Catálogo</title>	
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">	
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>	
-<style>	
-body {	
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa Music – Catálogo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<style>
+body {
 	font-family: 'Inter', sans-serif;
 	background-color: #0d0d0d;
 	color: #fff;
 	margin: 0;
 	padding: 20px;
-}	
-.nav {	
+}
+.nav {
 	display: flex;
 	gap: 20px;
 	background-color: #1a1a1a;
 	padding: 10px 20px;
 	border-radius: 10px;
 	margin-bottom: 20px;
-}	
-.nav a {	
+}
+.nav a {
 	color: #00fff0;
 	text-decoration: none;
 	cursor: pointer;
 	font-weight: bold;
-}	
-.nav a:hover { text-decoration: underline; }	
-.tab-content { display: none; }	
-.tab-content.active { display: block; }	
-.header { display: flex; align-items: center; justify-content: flex-start; margin-bottom: 20px; }	
-.header img { height: 100px; }	
-input[type="text"], input[type="email"] {	
+}
+.nav a:hover { text-decoration: underline; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.header { display: flex; align-items: center; justify-content: flex-start; margin-bottom: 20px; }
+.header img { height: 100px; }
+input[type="text"], input[type="email"] {
 	width: 100%;
 	max-width: 500px;
 	margin: 0 auto 20px;
@@ -44,9 +44,9 @@ input[type="text"], input[type="email"] {
 	border: 2px solid #00FFFF;
 	background-color: #2a2a2a;
 	color: #fff;
-}	
-.filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 30px; }	
-.tag-btn {	
+}
+.filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 30px; }
+.tag-btn {
 	background: #2d2d2d;
 	color: #fff;
 	border: 1px solid #444;
@@ -55,10 +55,10 @@ input[type="text"], input[type="email"] {
 	cursor: pointer;
 	font-size: 13px;
 	transition: all 0.3s ease;
-}	
-.tag-btn:hover, .tag-btn.active { background-color: #00b4d8; }	
-#catalogo { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }	
-.card {	
+}
+.tag-btn:hover, .tag-btn.active { background-color: #00b4d8; }
+#catalogo { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+.card {
 	background: #1a1a1a;
 	border-radius: 16px;
 	padding: 10px;
@@ -70,9 +70,9 @@ input[type="text"], input[type="email"] {
 	position: relative;
 	overflow: hidden;
 	transition: transform 0.3s;
-}	
-.card.playing { box-shadow: 0 0 12px 3px #00ffff80; transform: scale(1.05); }	
-.card img {	
+}
+.card.playing { box-shadow: 0 0 12px 3px #00ffff80; transform: scale(1.05); }
+.card img {
 	width: 100%;
 	height: 180px;
 	object-fit: cover;
@@ -82,20 +82,20 @@ input[type="text"], input[type="email"] {
 	cursor: pointer;
 	transition: opacity 0.3s;
 	max-width: 100%;
-}	
-.card.playing img { opacity: 0.5; }	
-.card h2 { margin: 10px 0 2px; font-size: 16px; color: #ffffff; }	
-.card p { font-size: 12px; color: #aaaaaa; margin: 0 0 6px; }	
-.card a.download-link {	
+}
+.card.playing img { opacity: 0.5; }
+.card h2 { margin: 10px 0 2px; font-size: 16px; color: #ffffff; }
+.card p { font-size: 12px; color: #aaaaaa; margin: 0 0 6px; }
+.card a.download-link {
 	margin-top: 8px;
 	color: #00fff0;
 	font-size: 13px;
 	text-decoration: none;
 	font-weight: bold;
 	cursor: pointer;
-}	
-.card a.download-link:hover { text-decoration: underline; }	
-#popupAviso {	
+}
+.card a.download-link:hover { text-decoration: underline; }
+#popupAviso {
 	display: none;
 	position: fixed;
 	top: 50%;
@@ -110,21 +110,21 @@ input[type="text"], input[type="email"] {
 	z-index: 1000;
 	color: #fff;
 	font-size: 15px;
-}	
-#popupAviso input[type="checkbox"] { margin-right: 10px; }	
-/* --- Responsive design --- */	
-@media (max-width: 900px) {	
+}
+#popupAviso input[type="checkbox"] { margin-right: 10px; }
+/* --- Responsive design --- */
+@media (max-width: 900px) {
 	#catalogo { gap: 14px; }
 	.card { width: 46vw; max-width: 270px; }
-}	
-@media (max-width: 700px) {	
+}
+@media (max-width: 700px) {
 	.header img { height: 60px; }
 	.filters { flex-direction: column; gap: 8px; }
 	#catalogo { gap: 10px; }
 	.card { width: 90vw; max-width: 350px; padding: 10px 4px; }
 	section { padding: 6vw 0; }
-}	
-@media (max-width: 500px) {	
+}
+@media (max-width: 500px) {
 	body { padding: 6vw 2vw; }
 	.nav { flex-direction: column; gap: 10px; padding: 12px; }
 	.card { width: 99vw; max-width: 98vw; }
@@ -132,9 +132,24 @@ input[type="text"], input[type="email"] {
 	h1, h2 { font-size: 20px !important; }
 	#popupAviso { max-width: 97vw; padding: 8vw 2vw; font-size: 14px; }
 	section { padding: 3vw 0; }
-}	
-</style>	
-</head>	
-<body>	
-<div class="nav">	
-	<a onclick="mostrarSeccion
+}
+</style>
+</head>
+<body>
+<div class="nav">
+	<a href="#">Inicio</a>
+	<a href="#">Catálogo</a>
+	<a href="#">Licencias</a>
+	<a href="#">Contacto</a>
+</div>
+<div id="catalogo">
+	<div class="card">
+		<img src="https://via.placeholder.com/180x180.png?text=Cover" alt="Ejemplo">
+		<h2>Ejemplo de canción</h2>
+		<p>Artista Demo</p>
+		<a class="download-link" href="#">Descargar</a>
+	</div>
+	<!-- Puedes duplicar este bloque .card para más canciones -->
+</div>
+</body>
+</html>
