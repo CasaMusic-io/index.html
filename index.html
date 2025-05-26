@@ -459,52 +459,51 @@ let playlistsSheet = [];
 let playlistsLoaded = false;
 
 async function cargarPlaylistsSheet() {
-try {
-const response = await fetch(PLAYLISTS_CSV_URL);
-const csv = await response.text();
-const data = Papa.parse(csv, { header: true }).data;
-playlistsSheet = data.filter(row =>
-row["Nombre"] && row["Portada"] && row["Numero de Canciones"] && row["URL SPOTIFY"]
-);
-playlistsLoaded = true;
-mostrarPlaylistsRandomSheet();
-setInterval(mostrarPlaylistsRandomSheet, 20000); // Cambia cada 20 seg
-} catch (err) {
-document.getElementById('playlist-list').innerHTML = "<div style='color:#ff8080'>No se pudieron cargar playlists.</div>";
-}
+  try {
+    const response = await fetch(PLAYLISTS_CSV_URL);
+    const csv = await response.text();
+    const data = Papa.parse(csv, { header: true }).data;
+    playlistsSheet = data.filter(row =>
+      row["Nombre"] && row["Portada"] && row["Numero de Canciones"] && row["URL SPOTIFY"]
+    );
+    playlistsLoaded = true;
+    mostrarPlaylistsRandomSheet();
+    setInterval(mostrarPlaylistsRandomSheet, 20000); // Cambia cada 20 seg
+  } catch (err) {
+    document.getElementById('playlist-list').innerHTML = "<div style='color:#ff8080'>No se pudieron cargar playlists.</div>";
+  }
 }
 function mostrarPlaylistsRandomSheet() {
-const container = document.getElementById('playlist-list');
-container.innerHTML = '';
-if (!playlistsLoaded || playlistsSheet.length === 0) {
-container.innerHTML = "<div style='color:#ff8080'>No hay playlists disponibles.</div>";
-return;
-}
-let items = [...playlistsSheet];
-let seleccionadas = [];
-for (let i = 0; i < 3 && items.length > 0; i++) {
-const idx = Math.floor(Math.random() * items.length);
-seleccionadas.push(items[idx]);
-items.splice(idx, 1);
-}
-seleccionadas.forEach(pl => {
-const div = document.createElement('div');
-div.className = 'playlist-row';
-div.innerHTML = `
-<img src="${pl["Portada"]}" class="playlist-img" alt="${pl["Nombre"]}">
-<div class="playlist-info">
-<div class="playlist-title">${pl["Nombre"]}</div>
-<div class="playlist-songs">${pl["Numero de Canciones"]} canciones</div>
-</div>
-`;
-div.onclick = () => window.open(pl["URL SPOTIFY"], '_blank');
-container.appendChild(div);
-});
+  const container = document.getElementById('playlist-list');
+  container.innerHTML = '';
+  if (!playlistsLoaded || playlistsSheet.length === 0) {
+    container.innerHTML = "<div style='color:#ff8080'>No hay playlists disponibles.</div>";
+    return;
+  }
+  let items = [...playlistsSheet];
+  let seleccionadas = [];
+  for (let i = 0; i < 3 && items.length > 0; i++) {
+    const idx = Math.floor(Math.random() * items.length);
+    seleccionadas.push(items[idx]);
+    items.splice(idx, 1);
+  }
+  seleccionadas.forEach(pl => {
+    const div = document.createElement('div');
+    div.className = 'playlist-row';
+    div.innerHTML = `
+      <img src="${pl["Portada"]}" class="playlist-img" alt="${pl["Nombre"]}">
+      <div class="playlist-info">
+        <div class="playlist-title">${pl["Nombre"]}</div>
+        <div class="playlist-songs">${pl["Numero de Canciones"]} canciones</div>
+      </div>
+    `;
+    div.onclick = () => window.open(pl["URL SPOTIFY"], '_blank');
+    container.appendChild(div);
+  });
 }
 cargarPlaylistsSheet();
 
 // ========== CATALOGO DE MUSICA CON PAGINACION ==========
-
 let canciones = [], audioActual = null, cardActual = null, descargaActiva = null;
 let cancionesFiltradas = [];
 let paginaActual = 1;
@@ -525,53 +524,53 @@ function compararSimilitud(a, b) {
 }
 
 function mostrarSeccion(id) {
-document.querySelectorAll('.tab-content').forEach(sec => sec.style.display = 'none');
-if (id === 'inicio') {
-document.getElementById('catalogo').style.display = '';
-document.getElementById('paginacion').style.display = '';
-document.querySelector('.layout-main').style.display = '';
-document.getElementById('busqueda').parentElement.style.display = '';
-document.querySelector('.filtros-gen').style.display = '';
-paginaActual = 1;
-mostrarAleatorias();
-} else {
-document.getElementById('catalogo').style.display = 'none';
-document.getElementById('paginacion').style.display = 'none';
-document.querySelector('.layout-main').style.display = 'none';
-document.getElementById('busqueda').parentElement.style.display = 'none';
-document.querySelector('.filtros-gen').style.display = 'none';
-document.getElementById(id).style.display = 'block';
-}
-document.querySelectorAll('.menu-nav a').forEach(a => a.classList.remove('active'));
-document.querySelector(`.menu-nav a[onclick*="${id}"]`).classList.add('active');
+  document.querySelectorAll('.tab-content').forEach(sec => sec.style.display = 'none');
+  if (id === 'inicio') {
+    document.getElementById('catalogo').style.display = '';
+    document.getElementById('paginacion').style.display = '';
+    document.querySelector('.layout-main').style.display = '';
+    document.getElementById('busqueda').parentElement.style.display = '';
+    document.querySelector('.filtros-gen').style.display = '';
+    paginaActual = 1;
+    mostrarAleatorias();
+  } else {
+    document.getElementById('catalogo').style.display = 'none';
+    document.getElementById('paginacion').style.display = 'none';
+    document.querySelector('.layout-main').style.display = 'none';
+    document.getElementById('busqueda').parentElement.style.display = 'none';
+    document.querySelector('.filtros-gen').style.display = 'none';
+    document.getElementById(id).style.display = 'block';
+  }
+  document.querySelectorAll('.menu-nav a').forEach(a => a.classList.remove('active'));
+  document.querySelector(`.menu-nav a[onclick*="${id}"]`).classList.add('active');
 }
 
 async function cargarCanciones() {
-try {
-const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSaml4sMmV59VPP9Cc25ZKitHWRjyxiOvExUrouRMDN4ZiA40QHbBGWrUv4xDJY5KOvujH2Cq-Dr1vf/pub?gid=842801860&single=true&output=csv';
-const response = await fetch(url);
-const csv = await response.text();
-const data = Papa.parse(csv, { header: true }).data;
-canciones = data.filter(c => c['Titulo'] && c['URL Audio MP3 Para Reproduccion']);
-mostrarAleatorias();
-} catch (error) {
-console.error('Error cargando canciones:', error);
-document.getElementById('catalogo').innerHTML = '<p style="text-align:center; color:red;">No se pudo cargar el catálogo.</p>';
-document.getElementById('paginacion').innerHTML = '';
-}
+  try {
+    const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSaml4sMmV59VPP9Cc25ZKitHWRjyxiOvExUrouRMDN4ZiA40QHbBGWrUv4xDJY5KOvujH2Cq-Dr1vf/pub?gid=842801860&single=true&output=csv';
+    const response = await fetch(url);
+    const csv = await response.text();
+    const data = Papa.parse(csv, { header: true }).data;
+    canciones = data.filter(c => c['Titulo'] && c['URL Audio MP3 Para Reproduccion']);
+    mostrarAleatorias();
+  } catch (error) {
+    console.error('Error cargando canciones:', error);
+    document.getElementById('catalogo').innerHTML = '<p style="text-align:center; color:red;">No se pudo cargar el catálogo.</p>';
+    document.getElementById('paginacion').innerHTML = '';
+  }
 }
 function mostrarAleatorias() {
-cancionesFiltradas = canciones.sort(() => 0.5 - Math.random()).slice(0, 10);
-paginaActual = 1;
-renderizarCatalogoPaginado();
+  cancionesFiltradas = canciones.sort(() => 0.5 - Math.random()).slice(0, 10);
+  paginaActual = 1;
+  renderizarCatalogoPaginado();
 }
 function filtrarPorGenero(genero) {
-cancionesFiltradas = canciones.filter(c =>
-c['Genero Principal']?.toLowerCase().includes(genero.toLowerCase()) ||
-c['Genero 2']?.toLowerCase().includes(genero.toLowerCase())
-);
-paginaActual = 1;
-renderizarCatalogoPaginado();
+  cancionesFiltradas = canciones.filter(c =>
+    c['Genero Principal']?.toLowerCase().includes(genero.toLowerCase()) ||
+    c['Genero 2']?.toLowerCase().includes(genero.toLowerCase())
+  );
+  paginaActual = 1;
+  renderizarCatalogoPaginado();
 }
 
 // FUNCIÓN DE BÚSQUEDA MEJORADA
@@ -580,8 +579,10 @@ function buscarCanciones() {
   if (!termino) return mostrarAleatorias();
   cancionesFiltradas = canciones.filter(c => {
     const campos = [
-      'Titulo', 'Artista', 'Genero Principal', 'Genero 2',
-      'Palabras Clave', 'Palabra Clave 2', 'Palabra Clave 3', 'Tags Genero'
+      'Titulo', 'Artista', 'Album', 'Genero Principal', 'Genero 2',
+      'Mood 1', 'Mood 2', 'Actividad 1', 'Actividad 2',
+      'Color', 'Sig. De Color', 'Instrumento 2', 'Instrumento 3',
+      'Palabra Clave 2', 'Palabra Clave 3', 'Tags Genero'
     ];
     return campos.some(campo => {
       const valor = quitarAcentos((c[campo] || '').toLowerCase());
@@ -593,90 +594,90 @@ function buscarCanciones() {
 }
 
 function renderizarCatalogoPaginado() {
-const catalogo = document.getElementById('catalogo');
-catalogo.innerHTML = '';
-const inicio = (paginaActual - 1) * cancionesPorPagina;
-const fin = inicio + cancionesPorPagina;
-const cancionesPagina = cancionesFiltradas.slice(inicio, fin);
-cancionesPagina.forEach(cancion => {
-const card = document.createElement('div');
-card.className = 'card';
-const audioId = 'audio_' + Math.random().toString(36).substr(2, 9);
-const downloadLink = cancion['URL Audio WAV Para Descarga'];
-card.innerHTML = `
-<img src="${cancion['URL Portada'] || 'https://via.placeholder.com/180'}" alt="${cancion['Titulo']}" onclick="reproducirAudio('${audioId}', this)">
-<h2>${cancion['Titulo']}</h2>
-<p>${cancion['Artista']}</p>
-<audio id="${audioId}" src="${downloadLink}"></audio>
-<a href="#" class="download-link" onclick="pedirDatos(event, '${downloadLink}')">Descarga</a>
-`;
-catalogo.appendChild(card);
-});
-renderizarPaginacion();
+  const catalogo = document.getElementById('catalogo');
+  catalogo.innerHTML = '';
+  const inicio = (paginaActual - 1) * cancionesPorPagina;
+  const fin = inicio + cancionesPorPagina;
+  const cancionesPagina = cancionesFiltradas.slice(inicio, fin);
+  cancionesPagina.forEach(cancion => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const audioId = 'audio_' + Math.random().toString(36).substr(2, 9);
+    const downloadLink = cancion['URL Audio WAV Para Descarga'];
+    card.innerHTML = `
+      <img src="${cancion['URL Portada'] || 'https://via.placeholder.com/180'}" alt="${cancion['Titulo']}" onclick="reproducirAudio('${audioId}', this)">
+      <h2>${cancion['Titulo']}</h2>
+      <p>${cancion['Artista']}</p>
+      <audio id="${audioId}" src="${downloadLink}"></audio>
+      <a href="#" class="download-link" onclick="pedirDatos(event, '${downloadLink}')">Descarga</a>
+    `;
+    catalogo.appendChild(card);
+  });
+  renderizarPaginacion();
 }
 function renderizarPaginacion() {
-const pagDiv = document.getElementById('paginacion');
-const totalCanciones = cancionesFiltradas.length;
-const totalPaginas = Math.ceil(totalCanciones / cancionesPorPagina);
+  const pagDiv = document.getElementById('paginacion');
+  const totalCanciones = cancionesFiltradas.length;
+  const totalPaginas = Math.ceil(totalCanciones / cancionesPorPagina);
 
-if (totalPaginas <= 1) {
-pagDiv.innerHTML = '';
-return;
-}
-let html = `<span style="margin-right:8px;">Página ${paginaActual} de ${totalPaginas}</span>`;
-if (paginaActual > 1) {
-html += `<button onclick="cambiarPagina(${paginaActual-1})" style="margin-right:4px;">Anterior</button>`;
-}
-let start = Math.max(1, paginaActual - 2);
-let end = Math.min(totalPaginas, paginaActual + 2);
-for (let i = start; i <= end; i++) {
-if (i === paginaActual) {
-html += `<span style="margin:0 3px;font-weight:700;color:#00fff0;">${i}</span>`;
-} else {
-html += `<button onclick="cambiarPagina(${i})" style="margin:0 3px;">${i}</button>`;
-}
-}
-if (paginaActual < totalPaginas) {
-html += `<button onclick="cambiarPagina(${paginaActual+1})" style="margin-left:4px;">Siguiente</button>`;
-}
-pagDiv.innerHTML = html;
+  if (totalPaginas <= 1) {
+    pagDiv.innerHTML = '';
+    return;
+  }
+  let html = `<span style="margin-right:8px;">Página ${paginaActual} de ${totalPaginas}</span>`;
+  if (paginaActual > 1) {
+    html += `<button onclick="cambiarPagina(${paginaActual-1})" style="margin-right:4px;">Anterior</button>`;
+  }
+  let start = Math.max(1, paginaActual - 2);
+  let end = Math.min(totalPaginas, paginaActual + 2);
+  for (let i = start; i <= end; i++) {
+    if (i === paginaActual) {
+      html += `<span style="margin:0 3px;font-weight:700;color:#00fff0;">${i}</span>`;
+    } else {
+      html += `<button onclick="cambiarPagina(${i})" style="margin:0 3px;">${i}</button>`;
+    }
+  }
+  if (paginaActual < totalPaginas) {
+    html += `<button onclick="cambiarPagina(${paginaActual+1})" style="margin-left:4px;">Siguiente</button>`;
+  }
+  pagDiv.innerHTML = html;
 }
 function cambiarPagina(nuevaPag) {
-paginaActual = nuevaPag;
-renderizarCatalogoPaginado();
+  paginaActual = nuevaPag;
+  renderizarCatalogoPaginado();
 }
 function reproducirAudio(id, imgEl) {
-const audio = document.getElementById(id);
-const card = imgEl.closest('.card');
-if (audioActual && audioActual !== audio) {
-audioActual.pause();
-audioActual.currentTime = 0;
-if (cardActual) cardActual.classList.remove('playing');
-}
-if (audio.paused) {
-audio.play();
-card.classList.add('playing');
-audioActual = audio;
-cardActual = card;
-} else {
-audio.pause();
-card.classList.remove('playing');
-audioActual = null;
-cardActual = null;
-}
+  const audio = document.getElementById(id);
+  const card = imgEl.closest('.card');
+  if (audioActual && audioActual !== audio) {
+    audioActual.pause();
+    audioActual.currentTime = 0;
+    if (cardActual) cardActual.classList.remove('playing');
+  }
+  if (audio.paused) {
+    audio.play();
+    card.classList.add('playing');
+    audioActual = audio;
+    cardActual = card;
+  } else {
+    audio.pause();
+    card.classList.remove('playing');
+    audioActual = null;
+    cardActual = null;
+  }
 }
 function pedirDatos(e, urlDescarga) {
-e.preventDefault();
-document.getElementById('popupAviso').style.display = 'block';
-descargaActiva = urlDescarga;
+  e.preventDefault();
+  document.getElementById('popupAviso').style.display = 'block';
+  descargaActiva = urlDescarga;
 }
 document.addEventListener('change', function(e) {
-if (e.target.id === 'aceptaCondiciones' && e.target.checked && descargaActiva) {
-window.open(descargaActiva, '_blank');
-document.getElementById('popupAviso').style.display = 'none';
-e.target.checked = false;
-descargaActiva = null;
-}
+  if (e.target.id === 'aceptaCondiciones' && e.target.checked && descargaActiva) {
+    window.open(descargaActiva, '_blank');
+    document.getElementById('popupAviso').style.display = 'none';
+    e.target.checked = false;
+    descargaActiva = null;
+  }
 });
 cargarCanciones();
 </script>
