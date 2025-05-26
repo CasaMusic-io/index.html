@@ -1,492 +1,531 @@
-<!DOCTYPE html>																					
-<html lang="es">																					
-<head>																					
-<meta charset="UTF-8">																					
-<title>Casa Music – Catálogo</title>																					
-<meta name="viewport" content="width=device-width, initial-scale=1">																					
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">																					
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>																					
-<style>																					
-body {																					
-font-family: 'Inter', sans-serif;																					
-background-color: #0d0d0d;																					
-color: #fff;																					
-margin: 0;																					
-padding: 20px;																					
-box-sizing: border-box;																					
-}																					
-.nav {																					
-display: flex;																					
-gap: 20px;																					
-background-color: #1a1a1a;																					
-padding: 10px 20px;																					
-border-radius: 10px;																					
-margin-bottom: 20px;																					
-flex-wrap: wrap;																					
-justify-content: center;																					
-}																					
-.nav a {																					
-color: #00fff0;																					
-text-decoration: none;																					
-cursor: pointer;																					
-font-weight: bold;																					
-font-size: 1rem;																					
-padding: 8px 10px;																					
-border-radius: 8px;																					
-transition: background .2s;																					
-}																					
-.nav a:hover {																					
-text-decoration: underline;																					
-background: #00fff022;																					
-}																					
-.tab-content { display: none; }																					
-.tab-content.active { display: block; }																					
-.header {																					
-display: flex;																					
-align-items: center;																					
-justify-content: center;																					
-margin-bottom: 20px;																					
-}																					
-.header img {																					
-height: 80px;																					
-max-width: 60vw;																					
-display: block;																					
-margin: 0 auto;																					
-}																					
-.info-bienvenida {																					
-background: linear-gradient(100deg, #10131a 60%, #101d23 100%);																					
-border: none;																					
-border-radius: 18px;																					
-box-shadow: 0 2px 22px 0 #00fff015;																					
-max-width: 550px;																					
-margin: 0 auto 12px auto;																					
-padding: 0;																					
-display: flex;																					
-align-items: center;																					
-justify-content: center;																					
-min-height: 84px;																					
-position: relative;																					
-overflow: hidden;																					
-}																					
-.bienvenida-row {																					
-display: flex;																					
-align-items: center;																					
-gap: 0.7em;																					
-width: 100%;																					
-padding: 14px 17px 12px 12px;																					
-}																					
-.bienvenida-icon span {																					
-font-size: 2.3em;																					
-color: #00fff0;																					
-filter: drop-shadow(0 2px 10px #00fff088);																					
-display: block;																					
-background: #14151a;																					
-border-radius: 12px;																					
-width: 2.1em;																					
-height: 2.1em;																					
-display: flex;																					
-align-items: center;																					
-justify-content: center;																					
-box-shadow: 0 1px 8px 0 #00fff055;																					
-margin-right: 4px;																					
-}																					
-.bienvenida-texto {																					
-flex: 1;																					
-min-width: 0;																					
-}																					
-.bienvenida-texto h2 {																					
-margin: 0 0 3px 0;																					
-font-size: 1.15em;																					
-font-weight: 700;																					
-line-height: 1.13;																					
-letter-spacing: 0.2px;																					
-color: #fff;																					
-}																					
-.bienvenida-texto p {																					
-margin: 0 0 3px 0;																					
-color: #bdfcff;																					
-font-size: 1em;																					
-line-height: 1.3;																					
-}																					
-.bienvenida-texto .highlight {																					
-color: #fff;																					
-font-size: 1.04em;																					
-}																					
-.bienvenida-texto .mini-lista {																					
-margin: 3px 0 3px 0;																					
-padding: 0 0 0 13px;																					
-list-style: none;																					
-font-size: 0.99em;																					
-color: #a6f7ff;																					
-}																					
-.bienvenida-texto .mini-lista li {																					
-margin-bottom: 0;																					
-padding-left: 0;																					
-line-height: 1.18;																					
-}																					
-.bienvenida-texto .pequeno {																					
-font-size: 0.95em;																					
-color: #85b9c9;																					
-margin-top: 3px;																					
-margin-bottom: 0;																					
-}																					
-.bienvenida-texto a {																					
-color: #00fff0;																					
-text-decoration: underline;																					
-font-weight: 500;																					
-transition: color .2s;																					
-}																					
-.bienvenida-texto a:hover {																					
-color: #fff;																					
-text-shadow: 0 0 4px #00fff0cc;																					
-}																					
-input[type="text"], input[type="email"] {																					
-width: 100%;																					
-max-width: 500px;																					
-margin: 0 auto 20px;																					
-display: block;																					
-padding: 12px 16px;																					
-font-size: 16px;																					
-border-radius: 30px;																					
-border: 2px solid #00FFFF;																					
-background-color: #2a2a2a;																					
-color: #fff;																					
-box-sizing: border-box;																					
-}																					
-.filters {																					
-display: flex;																					
-flex-wrap: wrap;																					
-justify-content: center;																					
-gap: 10px;																					
-margin-bottom: 30px;																					
-}																					
-.tag-btn {																					
-background: #2d2d2d;																					
-color: #fff;																					
-border: 1px solid #444;																					
-border-radius: 20px;																					
-padding: 7px 18px;																					
-cursor: pointer;																					
-font-size: 15px;																					
-transition: all 0.3s ease;																					
-}																					
-.tag-btn:hover, .tag-btn.active {																					
-background-color: #00b4d8;																					
-}																					
-#catalogo {																					
-display: flex;																					
-flex-wrap: wrap;																					
-gap: 20px;																					
-justify-content: center;																					
-}																					
-.card {																					
-background: #1a1a1a;																					
-border-radius: 16px;																					
-padding: 10px;																					
-width: 180px;																					
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);																					
-text-align: center;																					
-display: flex;																					
-flex-direction: column;																					
-position: relative;																					
-overflow: hidden;																					
-transition: transform 0.3s;																					
-}																					
-.card.playing { box-shadow: 0 0 12px 3px #00ffff80; transform: scale(1.05); }																					
-.card img {																					
-width: 100%;																					
-aspect-ratio: 1 / 1;																					
-height: auto;																					
-object-fit: cover;																					
-border-radius: 12px;																					
-border: 2px solid #00FFFF;																					
-display: block;																					
-cursor: pointer;																					
-transition: opacity 0.3s;																					
-background: #222;																					
-}																					
-.card.playing img { opacity: 0.5; }																					
-.card h2 { margin: 10px 0 2px; font-size: 16px; color: #ffffff; }																					
-.card p { font-size: 12px; color: #aaaaaa; margin: 0 0 6px; }																					
-.card a.download-link { margin-top: 8px; color: #00fff0; font-size: 13px; text-decoration: none; font-weight: bold; cursor: pointer; }																					
-.card a.download-link:hover { text-decoration: underline; }																					
-#popupAviso {																					
-display: none;																					
-position: fixed;																					
-top: 50%;																					
-left: 50%;																					
-transform: translate(-50%, -50%);																					
-background: #1a1a1a;																					
-border: 2px solid #00fff0;																					
-padding: 20px;																					
-border-radius: 12px;																					
-width: 90%;																					
-max-width: 500px;																					
-z-index: 1000;																					
-color: #fff;																					
-box-sizing: border-box;																					
-}																					
-#popupAviso input[type="checkbox"] { margin-right: 10px; }																					
-/* --- RESPONSIVO --- */																					
-@media (max-width: 900px) {																					
-#catalogo { gap: 14px; }																					
-.card { width: 43vw; min-width: 155px; max-width: 220px; }																					
-.card img { aspect-ratio: 1 / 1; height: auto; }																					
-}																					
-@media (max-width: 700px) {																					
-.info-bienvenida { padding: 0; font-size: 1em; }																					
-.bienvenida-row { gap: 0.4em; padding: 11px 7px 10px 7px; }																					
-.bienvenida-icon span { font-size: 1.6em; min-width: 1.7em; height: 1.7em;}																					
-.bienvenida-texto h2 { font-size: 1.01em;}																					
-.header img { height: 54px; }																					
-}																					
-@media (max-width: 600px) {																					
-body { padding: 8px; }																					
-.nav { flex-direction: column; align-items: center; gap: 6px; padding: 8px; font-size: 16px; }																					
-.nav a { width: 100%; text-align: center; padding: 10px 0; font-size: 17px;}																					
-.filters { gap: 6px; }																					
-.tag-btn { font-size: 14px; padding: 7px 12px; }																					
-#catalogo { gap: 10px; }																					
-.card { width: 95vw; min-width: 140px; max-width: 320px; }																					
-.card img { aspect-ratio: 1 / 1; height: auto; }																					
-.card h2 { font-size: 14px; }																					
-.card p { font-size: 12px; }																					
-.card a.download-link { font-size: 13px; }																					
-#popupAviso { padding: 10px; }																					
-section { padding: 2vw !important; }																					
-}																					
-</style>																					
-</head>																					
-<body>																					
-<div class="nav">																					
-<a onclick="mostrarSeccion('inicio')">Inicio</a>																					
-<a onclick="mostrarSeccion('licencias')">Licencias</a>																					
-<a onclick="mostrarSeccion('contacto')">Contacto</a>																					
-</div>																					
-<div id="inicio" class="tab-content active">																					
-<div class="header">																					
-<a href="#" onclick="recargarInicio(event)">																					
-<img src="https://catalogo.nyc3.digitaloceanspaces.com/ImagenesPagina/LOGO%20PAGINA.png" alt="Casa Music logo">																					
-</a>																					
-</div>																					
-<div class="info-bienvenida">																					
-<div class="bienvenida-row">																					
-<div class="bienvenida-icon">																					
-<span>🎧</span>																					
-</div>																					
-<div class="bienvenida-texto">																					
-<h2>¡Bienvenido a <span style="color:#00fff0;">Casa Music</span>!</h2>																					
-<p>																					
-<span class="highlight">Descarga <b>música original</b> para tus videos, streams y proyectos.</span>																					
-<br>																					
-<b>Rápido, fácil y sin reclamos de derechos.</b>																					
-</p>																					
-<ul class="mini-lista">																					
-<li>🔹 Llena el <a href="https://docs.google.com/forms/d/e/1FAIpQLSdps8X0qeIWNxvOp60yaVzQmIVQrosYpixweUYlZc7LTOrtyA/viewform?usp=dialog" target="_blank">formulario</a>.</li>																					
-<li>🔹 Da crédito correcto en tu video.</li>																					
-</ul>																					
-<p class="pequeno">																					
-Música <b>libre de derechos</b> solo para creadores registrados.<br>																					
-¿Dudas? <a href="mailto:casaazulrecord@gmail.com"><b>Contáctanos</b></a>																					
-</p>																					
-</div>																					
-</div>																					
-</div>																					
-<input type="text" id="busqueda" placeholder="Buscar música..." oninput="buscarCanciones()">																					
-<div class="filters">																					
-<button class="tag-btn" onclick="filtrarPorGenero('Lo-Fi')">Lo-Fi</button>																					
-<button class="tag-btn" onclick="filtrarPorGenero('Sleep')">Sleep</button>																					
-<button class="tag-btn" onclick="filtrarPorGenero('Ambient')">Ambient</button>																					
-<button class="tag-btn" onclick="filtrarPorGenero('Phonk')">Phonk</button>																					
-<button class="tag-btn" onclick="filtrarPorGenero('House')">House</button>																					
-<button class="tag-btn" onclick="filtrarPorGenero('Dark Ambient')">Dark Ambient</button>																					
-</div>																					
-<div id="catalogo"></div>																					
-</div>																					
-<div id="licencias" class="tab-content">																					
-<h1 style="color:#00fff0;margin-bottom:14px;">Licencias</h1>																					
-<section style="max-width:700px;margin:0 auto;line-height:1.7;">																					
-<h2 style="color:#00d4ff;font-size:20px;">Términos y Condiciones de Uso de Licencias – Casa Music.io</h2>																					
-<div style="color:#bbbbbb;font-size:13px;margin-bottom:14px;">																					
-Última actualización: <b>20 de mayo de 2025</b>																					
-</div>																					
-<p>Este documento establece los términos y condiciones bajo los cuales se autoriza el uso del contenido musical disponible en Casa Music.io (en adelante, "Casa Music") por parte de creadores de contenido, youtubers, streamers, marcas y otros usuarios digitales.</p>																					
-<ol style="margin-left:22px;">																					
-<li>																					
-<b>Concesión de Licencia</b>																					
-<p>Casa Music otorga a los usuarios registrados una licencia limitada, no exclusiva, revocable e intransferible para usar la música disponible en su catálogo, exclusivamente en proyectos audiovisuales, canales de YouTube, transmisiones en vivo, redes sociales o plataformas similares, siempre y cuando se cumplan los requisitos establecidos en este contrato.</p>																					
-</li>																					
-<li>																					
-<b>Requisitos Obligatorios para el Uso de la Música</b>																					
-<ul style="list-style-type: disc; margin-left: 18px;">																					
-<li>																					
-<b>2.1 Registro obligatorio</b><br>																					
-Es obligatorio que el usuario complete correctamente el formulario de registro oficial disponible en Casa Music.io o directamente en el siguiente enlace:<br>																					
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSdps8X0qeIWNxvOp60yaVzQmIVQrosYpixweUYlZc7LTOrtyA/viewform?usp=dialog" target="_blank" style="color:#00fff0;text-decoration:underline;">🔗 Formulario de registro</a><br>																					
-Una vez enviado, el canal o cuenta será evaluada e incluida en la lista blanca (whitelist) en un plazo estimado de 2 a 3 días hábiles.																					
-</li>																					
-<li>																					
-<b>2.2 Créditos obligatorios</b><br>																					
-En la descripción de cada video o contenido publicado que utilice música licenciada de Casa Music, el usuario deberá incluir obligatoriamente los siguientes créditos:																					
-<ul style="margin-top:7px;">																					
-<li>Música licenciada por: <b>Casa Music.io</b></li>																					
-<li>Artista: <i>[Nombre del artista]</i></li>																					
-<li>Álbum o EP: <i>[Título del disco]</i></li>																					
-</ul>																					
-<span style="color:#ff8080;">La omisión de los créditos obligatorios puede resultar en la revocación inmediata de la licencia y el retiro de la cuenta de la lista blanca.</span>																					
-</li>																					
-</ul>																					
-</li>																					
-<li>																					
-<b>Restricciones de Uso</b>																					
-<ul style="list-style-type: disc; margin-left: 18px;">																					
-<li>Reutilizar o revender la música como contenido independiente (por ejemplo, subirla a plataformas de streaming, venderla como NFT, o distribuirla como si fuera propia).</li>																					
-<li>Usar la música para contenido que infrinja normas legales o morales, como violencia explícita, discursos de odio, racismo, xenofobia o contenido sexual sin moderación.</li>																					
-<li>Usar la música sin haber sido previamente registrado o sin haber incluido los créditos correspondientes.</li>																					
-</ul>																					
-</li>																					
-<li>																					
-<b>Modificación y Cancelación de la Licencia</b>																					
-<p>Casa Music se reserva el derecho de modificar estos términos en cualquier momento. En caso de incumplimiento por parte del usuario, la licencia podrá ser revocada de forma inmediata, sin previo aviso.</p>																					
-</li>																					
-<li>																					
-<b>Contacto y Soporte</b>																					
-<p>Para cualquier duda, aclaración o soporte relacionado con el uso de las licencias o el proceso de registro, por favor escribe a:</p>																					
-<div style="font-weight:bold; color:#00fff0;">📧 casaazulrecord@gmail.com</div>																					
-</li>																					
-<li>																					
-<b>Aceptación de los Términos</b>																					
-<p>Al usar cualquier canción o contenido del catálogo de Casa Music, el usuario acepta de manera explícita todos los términos y condiciones aquí establecidos.</p>																					
-</li>																					
-</ol>																					
-</section>																					
-</div>																					
-<div id="contacto" class="tab-content">																					
-<h1>Contacto</h1>																					
-<p>Escríbenos a <a href="mailto:casaazulrecord@gmail.com">casaazulrecord@gmail.com</a></p>																					
-</div>																					
-<div id="popupAviso">																					
-<p><strong>⚠️ ATENCIÓN:</strong> Evita infracciones en tu canal de YouTube.</p>																					
-<p>Para evitar reclamaciones de derechos de autor por parte de YouTube al usar nuestras canciones, es indispensable que sigas estos pasos:</p>																					
-<ul>																					
-<li>Da crédito correctamente al título de la canción y al artista correspondiente en la descripción de tu video o contenido.</li>																					
-<li>Llena nuestro <a href="https://docs.google.com/forms/d/e/1FAIpQLSdps8X0qeIWNxvOp60yaVzQmIVQrosYpixweUYlZc7LTOrtyA/viewform?usp=dialog" target="_blank" style="color:#00fff0">formulario de uso</a> para registrar tu canal y permitirnos incluirlo en la lista blanca (whitelist).</li>																					
-<li>Este proceso nos permite autorizar tu canal de forma oficial ante las plataformas y así evitar bloqueos, silencios o monetización por terceros.</li>																					
-</ul>																					
-<p>Si tienes dudas, contáctanos a: <a href="mailto:casaazulrecord@gmail.com">casaazulrecord@gmail.com</a></p>																					
-<label><input type="checkbox" id="aceptaCondiciones"> Listo, Acepto las condiciones y estoy listo para usar el audio.</label>																					
-</div>																					
-<script>																					
-let canciones = [], audioActual = null, cardActual = null, descargaActiva = null;																					
-																					
-function mostrarSeccion(id) {																					
-document.querySelectorAll('.tab-content').forEach(sec => sec.classList.remove('active'));																					
-document.getElementById(id).classList.add('active');																					
-}																					
-																					
-function recargarInicio(e) {																					
-if (e) e.preventDefault();																					
-document.getElementById('busqueda').value = '';																					
-document.querySelectorAll('.tab-content').forEach(sec => sec.classList.remove('active'));																					
-document.getElementById('inicio').classList.add('active');																					
-mostrarAleatorias();																					
-}																					
-																					
-async function cargarCanciones() {																					
-try {																					
-const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSaml4sMmV59VPP9Cc25ZKitHWRjyxiOvExUrouRMDN4ZiA40QHbBGWrUv4xDJY5KOvujH2Cq-Dr1vf/pub?gid=842801860&single=true&output=csv';																					
-const response = await fetch(url);																					
-const csv = await response.text();																					
-const data = Papa.parse(csv, { header: true }).data;																					
-canciones = data.filter(c => c['Titulo'] && c['URL Audio MP3 Para Reproduccion']);																					
-mostrarAleatorias();																					
-} catch (error) {																					
-console.error('Error cargando canciones:', error);																					
-document.getElementById('catalogo').innerHTML = '<p style="text-align:center; color:red;">No se pudo cargar el catálogo.</p>';																					
-}																					
-}																					
-																					
-function mostrarAleatorias() {																					
-const seleccionadas = canciones.sort(() => 0.5 - Math.random()).slice(0, 9);																					
-renderizarCatalogo(seleccionadas);																					
-}																					
-																					
-function filtrarPorGenero(genero) {																					
-const filtradas = canciones.filter(c =>																					
-c['Genero Principal']?.toLowerCase().includes(genero.toLowerCase()) ||																					
-c['Genero 2']?.toLowerCase().includes(genero.toLowerCase())																					
-);																					
-renderizarCatalogo(filtradas);																					
-}																					
-																					
-function buscarCanciones() {																					
-const termino = document.getElementById('busqueda').value.toLowerCase();																					
-if (!termino.trim()) return mostrarAleatorias();																					
-const filtradas = canciones.filter(c =>																					
-c['Titulo']?.toLowerCase().includes(termino) ||																					
-c['Artista']?.toLowerCase().includes(termino) ||																					
-c['Genero Principal']?.toLowerCase().includes(termino) ||																					
-c['Genero 2']?.toLowerCase().includes(termino)																					
-);																					
-renderizarCatalogo(filtradas);																					
-}																					
-																					
-function renderizarCatalogo(lista) {																					
-const catalogo = document.getElementById('catalogo');																					
-catalogo.innerHTML = '';																					
-lista.forEach(cancion => {																					
-const card = document.createElement('div');																					
-card.className = 'card';																					
-const audioId = 'audio_' + Math.random().toString(36).substr(2, 9);																					
-const downloadLink = cancion['URL Audio WAV Para Descarga'];																					
-card.innerHTML = `																					
-<img src="${cancion['URL Portada'] || 'https://via.placeholder.com/180'}" alt="${cancion['Titulo']}" onclick="reproducirAudio('${audioId}', this)">																					
-<h2>${cancion['Titulo']}</h2>																					
-<p>${cancion['Artista']}</p>																					
-<audio id="${audioId}" src="${downloadLink}"></audio>																					
-<a href="#" class="download-link" onclick="pedirDatos(event, '${downloadLink}')">Descarga</a>																					
-`;																					
-catalogo.appendChild(card);																					
-});																					
-}																					
-																					
-function reproducirAudio(id, imgEl) {																					
-const audio = document.getElementById(id);																					
-const card = imgEl.closest('.card');																					
-if (audioActual && audioActual !== audio) {																					
-audioActual.pause();																					
-audioActual.currentTime = 0;																					
-if (cardActual) cardActual.classList.remove('playing');																					
-}																					
-if (audio.paused) {																					
-audio.play();																					
-card.classList.add('playing');																					
-audioActual = audio;																					
-cardActual = card;																					
-} else {																					
-audio.pause();																					
-card.classList.remove('playing');																					
-audioActual = null;																					
-cardActual = null;																					
-}																					
-}																					
-																					
-function pedirDatos(e, urlDescarga) {																					
-e.preventDefault();																					
-document.getElementById('popupAviso').style.display = 'block';																					
-descargaActiva = urlDescarga;																					
-}																					
-																					
-document.addEventListener('change', function(e) {																					
-if (e.target.id === 'aceptaCondiciones' && e.target.checked && descargaActiva) {																					
-window.open(descargaActiva, '_blank');																					
-document.getElementById('popupAviso').style.display = 'none';																					
-e.target.checked = false;																					
-descargaActiva = null;																					
-}																					
-});																					
-																					
-cargarCanciones();																					
-</script>																					
-</body>																					
-</html>																					
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Casa Music – Catálogo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0d0d0d;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+.header-bar {
+  display: flex;
+  align-items: center;
+  background: #181818;
+  padding: 0 0 0 20px;
+  min-height: 90px;
+  border-bottom: 2px solid #00fff022;
+}
+.logo-casa img {
+  height: 82px;
+  width: auto;
+  display: block;
+  margin-right: 30px;
+}
+.menu-nav {
+  display: flex;
+  gap: 38px;
+  flex: 1;
+}
+.menu-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 13px 23px 9px 23px;
+  font-size: 1.19em;
+  border-radius: 8px 8px 0 0;
+  background: none;
+  border-bottom: 4px solid transparent;
+  transition: background .16s, color .16s, border-bottom .16s;
+  cursor: pointer;
+  margin-top: 12px;
+}
+.menu-nav a.active {
+  background: #0d2227;
+  color: #00fff0;
+  border-bottom: 4px solid #00fff0;
+}
+.menu-nav a:hover {
+  color: #00fff0;
+}
+@media (max-width: 900px) {
+  .header-bar { flex-direction: column; align-items: flex-start; height: auto; padding: 9px 0 9px 13px;}
+  .menu-nav { margin: 7px 0 0 0; gap: 15px; }
+}
+.layout-main {
+  display: flex;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 12px 0 12px;
+  align-items: flex-start;
+  gap: 28px;
+}
+.bienvenida-block {
+  flex: 2.1;
+  margin-top: 6px;
+  min-width: 330px;
+  max-width: 650px;
+}
+.bienvenida-content {
+  background: linear-gradient(100deg, #10131a 60%, #101d23 100%);
+  border-radius: 18px;
+  box-shadow: 0 2px 22px 0 #00fff015;
+  padding: 28px 28px 16px 28px;
+  border: 3px solid #00fff0;
+  margin-bottom: 18px;
+}
+.bienvenida-content h2 {
+  color: #00fff0;
+  font-size: 1.28em;
+  margin: 0 0 11px 0;
+  font-weight: 700;
+}
+.bienvenida-content p {
+  font-size: 1.13em;
+  margin: 0 0 6px 0;
+  color: #bdfcff;
+  font-weight: 500;
+}
+.mini-lista {
+  margin: 15px 0 7px 5px;
+  padding: 0;
+  list-style: none;
+  color: #a6f7ff;
+  font-size: 1.04em;
+}
+.mini-lista li {
+  margin-bottom: 2px;
+  position: relative;
+  padding-left: 21px;
+}
+.mini-lista li::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  color: #00fff0;
+  font-size: 1em;
+}
+.pequeno {
+  font-size: 0.98em;
+  color: #85b9c9;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.bienvenida-content a {
+  color: #00fff0;
+  text-decoration: underline;
+  font-weight: 500;
+}
+.bienvenida-content a:hover {
+  color: #fff;
+  text-shadow: 0 0 4px #00fff0cc;
+}
+/* Playlists caja */
+#playlist-topbar {
+  background: #181818;
+  color: #fff;
+  border-radius: 17px;
+  box-shadow: 0 3px 24px #00fff044;
+  padding: 16px 13px 11px 16px;
+  width: 330px;
+  max-width: 99vw;
+  min-width: 210px;
+  z-index: 100;
+  border: 3px solid #00fff0;
+  margin-top: 0;
+}
+#playlist-topbar h4 {
+  color: #00fff0;
+  margin: 0 0 13px 0;
+  font-size: 1.14em;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  text-align: left;
+}
+.playlist-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding: 7px 2px 7px 2px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.14s;
+}
+.playlist-row:hover {
+  background: #00fff011;
+}
+.playlist-img {
+  width: 49px;
+  height: 49px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #00fff0;
+  background: #222;
+}
+.playlist-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.playlist-title {
+  font-size: 1.09em;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.playlist-songs {
+  font-size: 13px;
+  color: #aef8ee;
+  font-weight: 500;
+}
+@media (max-width: 950px) {
+  .layout-main { flex-direction: column; padding: 15px 1vw 0 1vw;}
+  .bienvenida-block { margin: 0 0 22px 0;}
+  #playlist-topbar { position: static; width: 100%; margin: 10px auto 14px auto; }
+}
+@media (max-width: 650px) {
+  .bienvenida-content { padding: 10px 7px 7px 9px;}
+  .playlist-img { width: 34px; height: 34px;}
+  #playlist-topbar { padding: 9px 4px 7px 7px; }
+}
+
+/* Buscador */
+#busqueda {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto 23px auto;
+  display: block;
+  padding: 15px 18px;
+  font-size: 17px;
+  border-radius: 30px;
+  border: 2.3px solid #00fff0;
+  background-color: #181818;
+  color: #fff;
+  box-sizing: border-box;
+  outline: none;
+  transition: border .25s;
+  margin-bottom: 21px;
+}
+#busqueda:focus {
+  border-color: #00fff0;
+  background: #192e2e;
+  box-shadow: 0 0 0 2px #00fff066;
+}
+
+/* Filtros de género */
+.filtros-gen {
+  display: flex;
+  gap: 14px;
+  margin: 0 0 10px 0;
+  justify-content: center;
+}
+.filtros-gen .tag-btn {
+  background: #181f22;
+  color: #fff;
+  border: 2px solid #00fff0;
+  border-radius: 20px;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-size: 1.08em;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  letter-spacing: 0.4px;
+  margin-bottom: 4px;
+}
+.filtros-gen .tag-btn:hover, .filtros-gen .tag-btn.active {
+  background-color: #00b4d8;
+  color: #fff;
+}
+/* Cards del catálogo */
+#catalogo {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  justify-content: center;
+}
+.card {
+  background: #1a1a1a;
+  border-radius: 18px;
+  padding: 14px 10px 10px 10px;
+  width: 210px;
+  min-height: 262px;
+  box-shadow: 0 4px 14px rgba(0, 255, 240, 0.09);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #00fff0;
+  transition: transform 0.3s;
+}
+.card.playing { box-shadow: 0 0 12px 4px #00ffff80; transform: scale(1.06);}
+.card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #00FFF0;
+  display: block;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  background: #222;
+}
+.card.playing img { opacity: 0.55; }
+.card h2 { margin: 10px 0 2px; font-size: 16px; color: #ffffff; }
+.card p { font-size: 12px; color: #aaaaaa; margin: 0 0 6px; }
+.card a.download-link { margin-top: 8px; color: #00fff0; font-size: 13px; text-decoration: none; font-weight: bold; cursor: pointer; }
+.card a.download-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- ENCABEZADO CON LOGO Y MENÚ -->
+<div class="header-bar">
+  <div class="logo-casa">
+    <img src="https://catalogo.nyc3.digitaloceanspaces.com/ImagenesPagina/LOGO%20PAGINA.png" alt="Casa Music logo">
+  </div>
+  <div class="menu-nav">
+    <a class="active" onclick="mostrarSeccion('inicio')">Inicio</a>
+    <a onclick="mostrarSeccion('licencias')">Licencias</a>
+    <a onclick="mostrarSeccion('contacto')">Contacto</a>
+    <a onclick="mostrarSeccion('artistas')">Artistas</a>
+  </div>
+</div>
+
+<!-- CONTENIDO PRINCIPAL (BLOQUES) -->
+<div class="layout-main">
+  <!-- BIENVENIDA -->
+  <div class="bienvenida-block">
+    <div class="bienvenida-content">
+      <h2>¡Bienvenido a Casa Music!</h2>
+      <p>Descarga música original para tus videos, streams y proyectos.</p>
+      <p>Rápido, fácil y sin reclamos de derechos.</p>
+      <ul class="mini-lista">
+        <li>Llena el <a href="https://docs.google.com/forms/d/e/1FAIpQLSdps8X0qeIWNxvOp60yaVzQmIVQrosYpixweUYlZc7LTOrtyA/viewform?usp=dialog" target="_blank">formulario</a>.</li>
+        <li>Da crédito correcto en tu video.</li>
+      </ul>
+      <p class="pequeno">Música <b>libre de derechos</b> solo para creadores registrados.<br>
+      ¿Dudas? <a href="mailto:casaazulrecord@gmail.com"><b>Contáctanos</b></a></p>
+    </div>
+  </div>
+
+  <!-- PLAYLISTS DESTACADAS -->
+  <div id="playlist-topbar">
+    <h4>Playlists destacadas</h4>
+    <div id="playlist-list"><div style='color:#bbb'>Cargando playlists...</div></div>
+  </div>
+</div>
+
+<!-- BUSCADOR Y FILTROS -->
+<div style="max-width: 600px; margin: 0 auto; margin-top: 18px;">
+  <input type="text" id="busqueda" placeholder="Buscar música..." oninput="buscarCanciones()">
+</div>
+<div class="filtros-gen">
+  <button class="tag-btn" onclick="filtrarPorGenero('Lo-Fi')">Lo-Fi</button>
+  <button class="tag-btn" onclick="filtrarPorGenero('Sleep')">Sleep</button>
+  <button class="tag-btn" onclick="filtrarPorGenero('Ambient')">Ambient</button>
+  <button class="tag-btn" onclick="filtrarPorGenero('Phonk')">Phonk</button>
+  <button class="tag-btn" onclick="filtrarPorGenero('House')">House</button>
+  <button class="tag-btn" onclick="filtrarPorGenero('Dark Ambient')">Dark Ambient</button>
+</div>
+
+<!-- CATÁLOGO DE MÚSICA -->
+<div id="catalogo"></div>
+
+<!-- SECCIONES OCULTAS -->
+<div id="licencias" class="tab-content" style="display:none;">
+  <h1 style="color:#00fff0;margin-bottom:14px;">Licencias</h1>
+</div>
+<div id="contacto" class="tab-content" style="display:none;">
+  <h1>Contacto</h1>
+  <p>Escríbenos a <a href="mailto:casaazulrecord@gmail.com">casaazulrecord@gmail.com</a></p>
+</div>
+<div id="artistas" class="tab-content" style="display:none;">
+  <h1>Artistas</h1>
+  <p>Próximamente...</p>
+</div>
+<div id="popupAviso" style="display:none;">
+  <p><strong>⚠️ ATENCIÓN:</strong> Evita infracciones en tu canal de YouTube.</p>
+  <ul>
+    <li>Da crédito correctamente al título de la canción y al artista correspondiente en la descripción de tu video o contenido.</li>
+    <li>Llena nuestro <a href="https://docs.google.com/forms/d/e/1FAIpQLSdps8X0qeIWNxvOp60yaVzQmIVQrosYpixweUYlZc7LTOrtyA/viewform?usp=dialog" target="_blank" style="color:#00fff0">formulario de uso</a> para registrar tu canal y permitirnos incluirlo en la lista blanca (whitelist).</li>
+    <li>Este proceso nos permite autorizar tu canal de forma oficial ante las plataformas y así evitar bloqueos, silencios o monetización por terceros.</li>
+  </ul>
+  <p>Si tienes dudas, contáctanos a: <a href="mailto:casaazulrecord@gmail.com">casaazulrecord@gmail.com</a></p>
+  <label><input type="checkbox" id="aceptaCondiciones"> Listo, Acepto las condiciones y estoy listo para usar el audio.</label>
+</div>
+<script>
+// ========== PLAYLISTS DESTACADAS ==========
+const PLAYLISTS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSaml4sMmV59VPP9Cc25ZKitHWRjyxiOvExUrouRMDN4ZiA40QHbBGWrUv4xDJY5KOvujH2Cq-Dr1vf/pub?gid=1630290697&single=true&output=csv";
+let playlistsSheet = [];
+let playlistsLoaded = false;
+
+async function cargarPlaylistsSheet() {
+  try {
+    const response = await fetch(PLAYLISTS_CSV_URL);
+    const csv = await response.text();
+    const data = Papa.parse(csv, { header: true }).data;
+    playlistsSheet = data.filter(row =>
+      row["Nombre"] && row["Portada"] && row["Numero de Canciones"] && row["URL SPOTIFY"]
+    );
+    playlistsLoaded = true;
+    mostrarPlaylistsRandomSheet();
+    setInterval(mostrarPlaylistsRandomSheet, 20000); // Cambia cada 20 seg
+  } catch (err) {
+    document.getElementById('playlist-list').innerHTML = "<div style='color:#ff8080'>No se pudieron cargar playlists.</div>";
+  }
+}
+
+function mostrarPlaylistsRandomSheet() {
+  const container = document.getElementById('playlist-list');
+  container.innerHTML = '';
+  if (!playlistsLoaded || playlistsSheet.length === 0) {
+    container.innerHTML = "<div style='color:#ff8080'>No hay playlists disponibles.</div>";
+    return;
+  }
+  let items = [...playlistsSheet];
+  let seleccionadas = [];
+  for (let i = 0; i < 3 && items.length > 0; i++) {
+    const idx = Math.floor(Math.random() * items.length);
+    seleccionadas.push(items[idx]);
+    items.splice(idx, 1);
+  }
+  seleccionadas.forEach(pl => {
+    const div = document.createElement('div');
+    div.className = 'playlist-row';
+    div.innerHTML = `
+      <img src="${pl["Portada"]}" class="playlist-img" alt="${pl["Nombre"]}">
+      <div class="playlist-info">
+        <div class="playlist-title">${pl["Nombre"]}</div>
+        <div class="playlist-songs">${pl["Numero de Canciones"]} canciones</div>
+      </div>
+    `;
+    div.onclick = () => window.open(pl["URL SPOTIFY"], '_blank');
+    container.appendChild(div);
+  });
+}
+cargarPlaylistsSheet();
+// ========== FIN PLAYLISTS DESTACADAS ==========
+
+// ========== CATALOGO DE MUSICA ==========
+let canciones = [], audioActual = null, cardActual = null, descargaActiva = null;
+function mostrarSeccion(id) {
+  document.querySelectorAll('.tab-content').forEach(sec => sec.style.display = 'none');
+  if (id === 'inicio') {
+    document.getElementById('catalogo').style.display = '';
+    document.querySelector('.layout-main').style.display = '';
+    document.getElementById('busqueda').parentElement.style.display = '';
+    document.querySelector('.filtros-gen').style.display = '';
+  } else {
+    document.getElementById('catalogo').style.display = 'none';
+    document.querySelector('.layout-main').style.display = 'none';
+    document.getElementById('busqueda').parentElement.style.display = 'none';
+    document.querySelector('.filtros-gen').style.display = 'none';
+    document.getElementById(id).style.display = 'block';
+  }
+  document.querySelectorAll('.menu-nav a').forEach(a => a.classList.remove('active'));
+  document.querySelector(`.menu-nav a[onclick*="${id}"]`).classList.add('active');
+}
+async function cargarCanciones() {
+  try {
+    const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSaml4sMmV59VPP9Cc25ZKitHWRjyxiOvExUrouRMDN4ZiA40QHbBGWrUv4xDJY5KOvujH2Cq-Dr1vf/pub?gid=842801860&single=true&output=csv';
+    const response = await fetch(url);
+    const csv = await response.text();
+    const data = Papa.parse(csv, { header: true }).data;
+    canciones = data.filter(c => c['Titulo'] && c['URL Audio MP3 Para Reproduccion']);
+    mostrarAleatorias();
+  } catch (error) {
+    console.error('Error cargando canciones:', error);
+    document.getElementById('catalogo').innerHTML = '<p style="text-align:center; color:red;">No se pudo cargar el catálogo.</p>';
+  }
+}
+function mostrarAleatorias() {
+  const seleccionadas = canciones.sort(() => 0.5 - Math.random()).slice(0, 10);
+  renderizarCatalogo(seleccionadas);
+}
+function filtrarPorGenero(genero) {
+  const filtradas = canciones.filter(c =>
+    c['Genero Principal']?.toLowerCase().includes(genero.toLowerCase()) ||
+    c['Genero 2']?.toLowerCase().includes(genero.toLowerCase())
+  );
+  renderizarCatalogo(filtradas);
+}
+function buscarCanciones() {
+  const termino = document.getElementById('busqueda').value.toLowerCase();
+  if (!termino.trim()) return mostrarAleatorias();
+  const filtradas = canciones.filter(c =>
+    c['Titulo']?.toLowerCase().includes(termino) ||
+    c['Artista']?.toLowerCase().includes(termino) ||
+    c['Genero Principal']?.toLowerCase().includes(termino) ||
+    c['Genero 2']?.toLowerCase().includes(termino)
+  );
+  renderizarCatalogo(filtradas);
+}
+function renderizarCatalogo(lista) {
+  const catalogo = document.getElementById('catalogo');
+  catalogo.innerHTML = '';
+  lista.forEach(cancion => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const audioId = 'audio_' + Math.random().toString(36).substr(2, 9);
+    const downloadLink = cancion['URL Audio WAV Para Descarga'];
+    card.innerHTML = `
+      <img src="${cancion['URL Portada'] || 'https://via.placeholder.com/180'}" alt="${cancion['Titulo']}" onclick="reproducirAudio('${audioId}', this)">
+      <h2>${cancion['Titulo']}</h2>
+      <p>${cancion['Artista']}</p>
+      <audio id="${audioId}" src="${downloadLink}"></audio>
+      <a href="#" class="download-link" onclick="pedirDatos(event, '${downloadLink}')">Descarga</a>
+    `;
+    catalogo.appendChild(card);
+  });
+}
+function reproducirAudio(id, imgEl) {
+  const audio = document.getElementById(id);
+  const card = imgEl.closest('.card');
+  if (audioActual && audioActual !== audio) {
+    audioActual.pause();
+    audioActual.currentTime = 0;
+    if (cardActual) cardActual.classList.remove('playing');
+  }
+  if (audio.paused) {
+    audio.play();
+    card.classList.add('playing');
+    audioActual = audio;
+    cardActual = card;
+  } else {
+    audio.pause();
+    card.classList.remove('playing');
+    audioActual = null;
+    cardActual = null;
+  }
+}
+function pedirDatos(e, urlDescarga) {
+  e.preventDefault();
+  document.getElementById('popupAviso').style.display = 'block';
+  descargaActiva = urlDescarga;
+}
+document.addEventListener('change', function(e) {
+  if (e.target.id === 'aceptaCondiciones' && e.target.checked && descargaActiva) {
+    window.open(descargaActiva, '_blank');
+    document.getElementById('popupAviso').style.display = 'none';
+    e.target.checked = false;
+    descargaActiva = null;
+  }
+});
+cargarCanciones();
+</script>
+</body>
+</html>
