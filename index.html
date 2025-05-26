@@ -288,6 +288,27 @@ body {
 .card p { font-size: 12px; color: #aaaaaa; margin: 0 0 6px; }
 .card a.download-link { margin-top: 8px; color: #00fff0; font-size: 13px; text-decoration: none; font-weight: bold; cursor: pointer; }
 .card a.download-link:hover { text-decoration: underline; }
+
+/* PAGINACION */
+#paginacion {
+  text-align: center;
+  margin: 18px 0 30px 0;
+}
+#paginacion button {
+  background: #101d23;
+  color: #00fff0;
+  border: 1.5px solid #00fff0;
+  border-radius: 6px;
+  padding: 4px 13px;
+  margin: 0 1.5px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .18s;
+}
+#paginacion button:hover {
+  background: #00fff011;
+}
 </style>
 </head>
 <body>
@@ -344,65 +365,60 @@ body {
 
 <!-- CATÁLOGO DE MÚSICA -->
 <div id="catalogo"></div>
+<div id="paginacion"></div>
 
 <!-- SECCIONES OCULTAS -->
 <div id="licencias" class="tab-content" style="display:none;">
-  <div style="max-width:660px;margin:45px auto 24px auto;padding:32px 28px 30px 28px;background:linear-gradient(108deg,#181f23 60%,#102022 100%);border:3px solid #00fff0;border-radius:18px;box-shadow:0 4px 24px 0 #00fff015;">
-    <div style="font-size:2.1em;line-height:1;margin-bottom:12px;display:flex;align-items:center;gap:10px;">
-      <span style="font-size:1.2em;color:#00fff0;">🎧</span>
-      <b style="color:#00fff0;">Licencias y Uso – Casa Music</b>
-    </div>
-    <p style="color:#bdfcff;margin:5px 0 16px 0;font-size:1.08em;">
+  <div style="max-width: 700px; margin: 0 auto; background: #131b1e; border-radius: 15px; border: 3px solid #00fff0; box-shadow: 0 3px 22px #00fff022; padding: 34px 23px 29px 23px; margin-top:40px;">
+    <h1 style="color:#00fff0; font-size:1.6em; margin-bottom:10px; font-weight:900;">🎧 Licencias y Uso – Casa Music</h1>
+    <div style="color:#bdfcff; font-size:1.18em; margin-bottom:18px;">
       Bienvenido a Casa Music, una plataforma de música libre de derechos diseñada especialmente para creadores de contenido. Al descargar y utilizar cualquiera de nuestras canciones, aceptas los términos descritos en esta sección.
-    </p>
-
-    <div style="margin:26px 0 10px 0;">
-      <b style="color:#fff;font-size:1.06em;">¿Qué puedes hacer con nuestra música?</b>
-      <ul style="margin:12px 0 18px 0;padding-left:20px;list-style:none;">
-        <li style="margin-bottom:5px;"><span style="color:#00ffb8;">✅</span> Usar la música en tus videos de YouTube, TikTok, Instagram, Facebook y Twitch.</li>
-        <li style="margin-bottom:5px;"><span style="color:#00ffb8;">✅</span> Monetizar tu contenido mientras uses la música correctamente acreditada.</li>
-        <li style="margin-bottom:5px;"><span style="color:#00ffb8;">✅</span> Descargar archivos en formato WAV y MP3 para tus proyectos creativos.</li>
-        <li style="margin-bottom:5px;"><span style="color:#00ffb8;">✅</span> Usarla en proyectos comerciales <b>siempre y cuando esté visible el crédito correspondiente</b>.</li>
+    </div>
+    <div style="margin-bottom:22px;">
+      <b style="color:#95ffdb;font-size:1.05em;">¿Qué puedes hacer con nuestra música?</b>
+      <ul style="margin:13px 0 7px 26px; color:#a6f7ff; font-size:1.05em;">
+        <li>✅ Usar la música en tus videos de YouTube, TikTok, Instagram, Facebook y Twitch.</li>
+        <li>✅ Monetizar tu contenido mientras uses la música correctamente acreditada.</li>
+        <li>✅ Descargar archivos en formato WAV y MP3 para usar en tus proyectos creativos.</li>
+        <li>✅ Usarla en proyectos comerciales, siempre y cuando esté visible el crédito correspondiente.</li>
       </ul>
     </div>
-
-    <div style="margin:24px 0 10px 0;">
-      <b style="color:#fff;font-size:1.06em;">❌ Lo que no está permitido</b>
-      <ul style="margin:12px 0 14px 0;padding-left:20px;list-style:none;">
-        <li style="margin-bottom:4px;"><span style="color:#ff8080;">🚫</span> Re-subir las canciones a plataformas de streaming (Spotify, Apple Music, etc.)</li>
-        <li style="margin-bottom:4px;"><span style="color:#ff8080;">🚫</span> Re-distribuir la música como si fuera propia.</li>
-        <li style="margin-bottom:4px;"><span style="color:#ff8080;">🚫</span> Usar las canciones sin acreditar al artista y a Casa Music.</li>
-        <li style="margin-bottom:4px;"><span style="color:#ff8080;">🚫</span> Crear versiones, remixes o remezclas sin autorización.</li>
+    <div style="margin-bottom:22px;">
+      <b style="color:#ff9999;font-size:1.05em;">❌ Lo que no está permitido</b>
+      <ul style="margin:13px 0 7px 26px; color:#ff9999; font-size:1.05em;">
+        <li>🚫 Re-subir las canciones a plataformas de streaming (Spotify, Apple Music, etc.).</li>
+        <li>🚫 Re-distribuir la música como si fuera propia.</li>
+        <li>🚫 Usar las canciones sin acreditar al artista y a Casa Music.</li>
+        <li>🚫 Crear versiones, remixes o remezclas sin autorización.</li>
       </ul>
     </div>
-
-    <div style="margin:28px 0 12px 0;padding:12px 17px;background:#122526;border-radius:9px;border:2px solid #00fff0;">
-      <b style="color:#00fff0;">🛡️ Protección con Identifyy (Content ID)</b>
-      <p style="margin:8px 0 0 0;color:#bdfcff;font-size:1em;">
-        Toda nuestra música está registrada con Identifyy para proteger los derechos de los artistas. Si no acreditas correctamente el uso de las canciones, tu video puede ser reclamado automáticamente por Content ID.<br>
-        <span style="color:#00ffb8;">Sin embargo, si sigues las instrucciones de atribución, tu video no será desmonetizado y quedará libre de reclamos.</span>
+    <div style="margin-bottom:22px;">
+      <b style="color:#95ffdb;font-size:1.08em;">🛡️ Protección con Identifyy (Content ID)</b>
+      <p style="margin:7px 0 0 0;color:#bdfcff;font-size:1.05em;">
+        Toda nuestra música está registrada con Identifyy para proteger los derechos de los artistas. Si no acreditas correctamente el uso de las canciones, tu video puede ser reclamado automáticamente por Content ID.
+        <br><br>
+        <span style="color:#c8ffd2;">
+        Sin embargo, si sigues las instrucciones de atribución, tu video no será desmonetizado y quedará libre de reclamos.</span>
       </p>
     </div>
-
-    <div style="margin:32px 0 16px 0;">
-      <b style="color:#fff;font-size:1.09em;">📌 ¿Cómo dar el crédito correcto?</b>
-      <p style="margin:8px 0 5px 0;font-size:1.03em;">Agrega el siguiente texto en la descripción de tu video o publicación:</p>
-      <div style="background:#122526;color:#9ff;border-radius:9px;padding:19px 19px 13px 19px;margin:7px 0 11px 0;font-size:1em;font-family:'Fira Mono', 'Consolas', 'monospace';white-space:pre-line;">
+    <div style="margin-bottom:22px;">
+      <b style="color:#00fff0;font-size:1.08em;">📌 ¿Cómo dar el crédito correcto?</b>
+      <p style="margin:8px 0 0 0; color:#bdfcff; font-size:1.05em;">
+        Agrega el siguiente texto en la descripción de tu video o publicación:</p>
+      <div style="background:#122526;color:#9ff;border-radius:9px;padding:19px 19px 13px 19px;margin:7px 0 11px 0;font-size:1em;font-family:monospace;">
 🎵 Música proporcionada por Casa Music<br>
 🎨 Artista: Lofi Blue Note<br>
 🎧 Canción: Lazy Couch Days<br>
-🔗 Playlist: https://www.casamusica.com/playlist-relax
+🔗 Playlist: https://www.casamusica.com/playlist-relax (reemplaza por el enlace correcto)
       </div>
-      <div style="font-size:0.98em;color:#85b9c9;margin-top:2px;">
-        <b>💡 Importante:</b> si usas varias canciones, puedes repetir este formato por cada pista utilizada.
-      </div>
+      <span style="color:#e7fda6; font-size:.98em;"><b>💡 Importante:</b> si usas varias canciones, puedes repetir este formato por cada pista utilizada.</span>
     </div>
-
-    <div style="margin:28px 0 0 0;">
-      <b style="color:#fff;font-size:1.08em;">📝 Licencia estándar</b>
-      <p style="margin:8px 0 0 0;color:#bdfcff;font-size:1.05em;">
-        Tu descarga incluye una licencia <b>no exclusiva</b>, <b>perpetua</b> y <b>libre de regalías</b> para usar la canción en tus creaciones, siempre que sigas las reglas de atribución.<br><br>
-        Para obtener licencias extendidas, exclusivas o para campañas publicitarias a gran escala, <a href="mailto:casaazulrecord@gmail.com" style="color:#00fff0;text-decoration:underline;">contáctanos directamente</a>.
+    <div>
+      <b style="color:#95ffdb;font-size:1.08em;">📝 Licencia estándar</b>
+      <p style="margin:8px 0 0 0; color:#bdfcff; font-size:1.04em;">
+        Tu descarga incluye una licencia no exclusiva, perpetua y libre de regalías para usar la canción en tus creaciones, siempre que sigas las reglas de atribución.
+        <br><br>
+        Para obtener licencias extendidas, exclusivas o para campañas publicitarias a gran escala, <a href="mailto:casaazulrecord@gmail.com" style="color:#00fff0">contáctanos directamente</a>.
       </p>
     </div>
   </div>
@@ -478,17 +494,25 @@ function mostrarPlaylistsRandomSheet() {
 cargarPlaylistsSheet();
 // ========== FIN PLAYLISTS DESTACADAS ==========
 
-// ========== CATALOGO DE MUSICA ==========
+// ========== CATALOGO DE MUSICA CON PAGINACION ==========
 let canciones = [], audioActual = null, cardActual = null, descargaActiva = null;
+let cancionesFiltradas = [];
+let paginaActual = 1;
+const cancionesPorPagina = 10;
+
 function mostrarSeccion(id) {
   document.querySelectorAll('.tab-content').forEach(sec => sec.style.display = 'none');
   if (id === 'inicio') {
     document.getElementById('catalogo').style.display = '';
+    document.getElementById('paginacion').style.display = '';
     document.querySelector('.layout-main').style.display = '';
     document.getElementById('busqueda').parentElement.style.display = '';
     document.querySelector('.filtros-gen').style.display = '';
+    paginaActual = 1;
+    mostrarAleatorias();
   } else {
     document.getElementById('catalogo').style.display = 'none';
+    document.getElementById('paginacion').style.display = 'none';
     document.querySelector('.layout-main').style.display = 'none';
     document.getElementById('busqueda').parentElement.style.display = 'none';
     document.querySelector('.filtros-gen').style.display = 'none';
@@ -508,34 +532,41 @@ async function cargarCanciones() {
   } catch (error) {
     console.error('Error cargando canciones:', error);
     document.getElementById('catalogo').innerHTML = '<p style="text-align:center; color:red;">No se pudo cargar el catálogo.</p>';
+    document.getElementById('paginacion').innerHTML = '';
   }
 }
 function mostrarAleatorias() {
-  const seleccionadas = canciones.sort(() => 0.5 - Math.random()).slice(0, 10);
-  renderizarCatalogo(seleccionadas);
+  cancionesFiltradas = canciones.sort(() => 0.5 - Math.random()).slice(0, 10);
+  paginaActual = 1;
+  renderizarCatalogoPaginado();
 }
 function filtrarPorGenero(genero) {
-  const filtradas = canciones.filter(c =>
+  cancionesFiltradas = canciones.filter(c =>
     c['Genero Principal']?.toLowerCase().includes(genero.toLowerCase()) ||
     c['Genero 2']?.toLowerCase().includes(genero.toLowerCase())
   );
-  renderizarCatalogo(filtradas);
+  paginaActual = 1;
+  renderizarCatalogoPaginado();
 }
 function buscarCanciones() {
   const termino = document.getElementById('busqueda').value.toLowerCase();
   if (!termino.trim()) return mostrarAleatorias();
-  const filtradas = canciones.filter(c =>
+  cancionesFiltradas = canciones.filter(c =>
     c['Titulo']?.toLowerCase().includes(termino) ||
     c['Artista']?.toLowerCase().includes(termino) ||
     c['Genero Principal']?.toLowerCase().includes(termino) ||
     c['Genero 2']?.toLowerCase().includes(termino)
   );
-  renderizarCatalogo(filtradas);
+  paginaActual = 1;
+  renderizarCatalogoPaginado();
 }
-function renderizarCatalogo(lista) {
+function renderizarCatalogoPaginado() {
   const catalogo = document.getElementById('catalogo');
   catalogo.innerHTML = '';
-  lista.forEach(cancion => {
+  const inicio = (paginaActual - 1) * cancionesPorPagina;
+  const fin = inicio + cancionesPorPagina;
+  const cancionesPagina = cancionesFiltradas.slice(inicio, fin);
+  cancionesPagina.forEach(cancion => {
     const card = document.createElement('div');
     card.className = 'card';
     const audioId = 'audio_' + Math.random().toString(36).substr(2, 9);
@@ -549,6 +580,38 @@ function renderizarCatalogo(lista) {
     `;
     catalogo.appendChild(card);
   });
+  renderizarPaginacion();
+}
+function renderizarPaginacion() {
+  const pagDiv = document.getElementById('paginacion');
+  const totalCanciones = cancionesFiltradas.length;
+  const totalPaginas = Math.ceil(totalCanciones / cancionesPorPagina);
+
+  if (totalPaginas <= 1) {
+    pagDiv.innerHTML = '';
+    return;
+  }
+  let html = `<span style="margin-right:8px;">Página ${paginaActual} de ${totalPaginas}</span>`;
+  if (paginaActual > 1) {
+    html += `<button onclick="cambiarPagina(${paginaActual-1})" style="margin-right:4px;">Anterior</button>`;
+  }
+  let start = Math.max(1, paginaActual - 2);
+  let end = Math.min(totalPaginas, paginaActual + 2);
+  for (let i = start; i <= end; i++) {
+    if (i === paginaActual) {
+      html += `<span style="margin:0 3px;font-weight:700;color:#00fff0;">${i}</span>`;
+    } else {
+      html += `<button onclick="cambiarPagina(${i})" style="margin:0 3px;">${i}</button>`;
+    }
+  }
+  if (paginaActual < totalPaginas) {
+    html += `<button onclick="cambiarPagina(${paginaActual+1})" style="margin-left:4px;">Siguiente</button>`;
+  }
+  pagDiv.innerHTML = html;
+}
+function cambiarPagina(nuevaPag) {
+  paginaActual = nuevaPag;
+  renderizarCatalogoPaginado();
 }
 function reproducirAudio(id, imgEl) {
   const audio = document.getElementById(id);
