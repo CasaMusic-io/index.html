@@ -7,272 +7,272 @@
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <style>
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: #0d0d0d;
-  color: #fff;
-  margin: 0;
-  padding: 0;
+font-family: 'Inter', sans-serif;
+background-color: #0d0d0d;
+color: #fff;
+margin: 0;
+padding: 0;
 }
 /* ====== HEADER Y MENÚ ====== */
 .header-bar {
-  display: flex;
-  align-items: center;
-  background: #181818;
-  padding: 0 0 0 20px;
-  min-height: 90px;
-  border-bottom: 2px solid #00fff022;
+display: flex;
+align-items: center;
+background: #181818;
+padding: 0 0 0 20px;
+min-height: 90px;
+border-bottom: 2px solid #00fff022;
 }
 .logo-casa img {
-  height: 82px;
-  width: auto;
-  display: block;
-  margin-right: 30px;
-  max-width: 200px;
+height: 82px;
+width: auto;
+display: block;
+margin-right: 30px;
+max-width: 200px;
 }
 .menu-nav {
-  display: flex;
-  gap: 38px;
-  flex: 1;
-  flex-wrap: wrap;
+display: flex;
+gap: 38px;
+flex: 1;
+flex-wrap: wrap;
 }
 .menu-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 13px 23px 9px 23px;
-  font-size: 1.19em;
-  border-radius: 8px 8px 0 0;
-  background: none;
-  border-bottom: 4px solid transparent;
-  transition: background .16s, color .16s, border-bottom .16s;
-  cursor: pointer;
-  margin-top: 12px;
+color: #fff;
+text-decoration: none;
+font-weight: 600;
+padding: 13px 23px 9px 23px;
+font-size: 1.19em;
+border-radius: 8px 8px 0 0;
+background: none;
+border-bottom: 4px solid transparent;
+transition: background .16s, color .16s, border-bottom .16s;
+cursor: pointer;
+margin-top: 12px;
 }
 .menu-nav a.active {
-  background: #0d2227;
-  color: #00fff0;
-  border-bottom: 4px solid #00fff0;
+background: #0d2227;
+color: #00fff0;
+border-bottom: 4px solid #00fff0;
 }
 .menu-nav a:hover {
-  color: #00fff0;
+color: #00fff0;
 }
 
 /* ====== LAYOUT PRINCIPAL ====== */
 .layout-main {
-  display: flex;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 28px 12px 0 12px;
-  align-items: flex-start;
-  gap: 28px;
+display: flex;
+max-width: 1180px;
+margin: 0 auto;
+padding: 28px 12px 0 12px;
+align-items: flex-start;
+gap: 28px;
 }
 .bienvenida-block {
-  flex: 2.1;
-  margin-top: 6px;
-  min-width: 260px;
-  max-width: 650px;
+flex: 2.1;
+margin-top: 6px;
+min-width: 260px;
+max-width: 650px;
 }
 .bienvenida-content {
-  background: linear-gradient(100deg, #10131a 60%, #101d23 100%);
-  border-radius: 18px;
-  box-shadow: 0 2px 22px 0 #00fff015;
-  padding: 28px 28px 16px 28px;
-  border: 3px solid #00fff0;
-  margin-bottom: 18px;
+background: linear-gradient(100deg, #10131a 60%, #101d23 100%);
+border-radius: 18px;
+box-shadow: 0 2px 22px 0 #00fff015;
+padding: 28px 28px 16px 28px;
+border: 3px solid #00fff0;
+margin-bottom: 18px;
 }
 .bienvenida-content h2 {
-  color: #00fff0;
-  font-size: 1.28em;
-  margin: 0 0 11px 0;
-  font-weight: 700;
+color: #00fff0;
+font-size: 1.28em;
+margin: 0 0 11px 0;
+font-weight: 700;
 }
 .bienvenida-content p {
-  font-size: 1.13em;
-  margin: 0 0 6px 0;
-  color: #bdfcff;
-  font-weight: 500;
+font-size: 1.13em;
+margin: 0 0 6px 0;
+color: #bdfcff;
+font-weight: 500;
 }
 .mini-lista {
-  margin: 15px 0 7px 5px;
-  padding: 0;
-  list-style: none;
-  color: #a6f7ff;
-  font-size: 1.04em;
+margin: 15px 0 7px 5px;
+padding: 0;
+list-style: none;
+color: #a6f7ff;
+font-size: 1.04em;
 }
 .mini-lista li {
-  margin-bottom: 2px;
-  position: relative;
-  padding-left: 21px;
+margin-bottom: 2px;
+position: relative;
+padding-left: 21px;
 }
 .mini-lista li::before {
-  content: "◆";
-  position: absolute;
-  left: 0;
-  color: #00fff0;
-  font-size: 1em;
+content: "◆";
+position: absolute;
+left: 0;
+color: #00fff0;
+font-size: 1em;
 }
 .pequeno {
-  font-size: 0.98em;
-  color: #85b9c9;
-  margin-top: 10px;
-  margin-bottom: 0;
+font-size: 0.98em;
+color: #85b9c9;
+margin-top: 10px;
+margin-bottom: 0;
 }
 .bienvenida-content a {
-  color: #00fff0;
-  text-decoration: underline;
-  font-weight: 500;
+color: #00fff0;
+text-decoration: underline;
+font-weight: 500;
 }
 .bienvenida-content a:hover {
-  color: #fff;
-  text-shadow: 0 0 4px #00fff0cc;
+color: #fff;
+text-shadow: 0 0 4px #00fff0cc;
 }
 /* ====== PLAYLISTS ====== */
 #playlist-topbar {
-  background: #181818;
-  color: #fff;
-  border-radius: 17px;
-  box-shadow: 0 3px 24px #00fff044;
-  padding: 16px 13px 11px 16px;
-  width: 330px;
-  max-width: 99vw;
-  min-width: 210px;
-  z-index: 100;
-  border: 3px solid #00fff0;
-  margin-top: 0;
+background: #181818;
+color: #fff;
+border-radius: 17px;
+box-shadow: 0 3px 24px #00fff044;
+padding: 16px 13px 11px 16px;
+width: 330px;
+max-width: 99vw;
+min-width: 210px;
+z-index: 100;
+border: 3px solid #00fff0;
+margin-top: 0;
 }
 #playlist-topbar h4 {
-  color: #00fff0;
-  margin: 0 0 13px 0;
-  font-size: 1.14em;
-  font-weight: 700;
-  letter-spacing: 0.2px;
-  text-align: left;
+color: #00fff0;
+margin: 0 0 13px 0;
+font-size: 1.14em;
+font-weight: 700;
+letter-spacing: 0.2px;
+text-align: left;
 }
 .playlist-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
-  padding: 7px 2px 7px 2px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.14s;
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 15px;
+padding: 7px 2px 7px 2px;
+border-radius: 8px;
+cursor: pointer;
+transition: background 0.14s;
 }
 .playlist-row:hover {
-  background: #00fff011;
+background: #00fff011;
 }
 .playlist-img {
-  width: 49px;
-  height: 49px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 2px solid #00fff0;
-  background: #222;
+width: 49px;
+height: 49px;
+object-fit: cover;
+border-radius: 8px;
+border: 2px solid #00fff0;
+background: #222;
 }
 .playlist-info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+flex: 1;
+min-width: 0;
+display: flex;
+flex-direction: column;
+justify-content: center;
 }
 .playlist-title {
-  font-size: 1.09em;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+font-size: 1.09em;
+font-weight: 600;
+color: #fff;
+margin-bottom: 2px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 }
 .playlist-songs {
-  font-size: 13px;
-  color: #aef8ee;
-  font-weight: 500;
+font-size: 13px;
+color: #aef8ee;
+font-weight: 500;
 }
 
 /* ====== BUSCADOR Y FILTROS ====== */
 #busqueda {
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto 23px auto;
-  display: block;
-  padding: 15px 18px;
-  font-size: 17px;
-  border-radius: 30px;
-  border: 2.3px solid #00fff0;
-  background-color: #181818;
-  color: #fff;
-  box-sizing: border-box;
-  outline: none;
-  transition: border .25s;
-  margin-bottom: 21px;
+width: 100%;
+max-width: 480px;
+margin: 0 auto 23px auto;
+display: block;
+padding: 15px 18px;
+font-size: 17px;
+border-radius: 30px;
+border: 2.3px solid #00fff0;
+background-color: #181818;
+color: #fff;
+box-sizing: border-box;
+outline: none;
+transition: border .25s;
+margin-bottom: 21px;
 }
 #busqueda:focus {
-  border-color: #00fff0;
-  background: #192e2e;
-  box-shadow: 0 0 0 2px #00fff066;
+border-color: #00fff0;
+background: #192e2e;
+box-shadow: 0 0 0 2px #00fff066;
 }
 .filtros-gen {
-  display: flex;
-  gap: 14px;
-  margin: 0 0 10px 0;
-  justify-content: center;
-  flex-wrap: wrap;
+display: flex;
+gap: 14px;
+margin: 0 0 10px 0;
+justify-content: center;
+flex-wrap: wrap;
 }
 .filtros-gen .tag-btn {
-  background: #181f22;
-  color: #fff;
-  border: 2px solid #00fff0;
-  border-radius: 20px;
-  padding: 8px 18px;
-  cursor: pointer;
-  font-size: 1.08em;
-  font-weight: 700;
-  transition: all 0.3s ease;
-  letter-spacing: 0.4px;
-  margin-bottom: 4px;
+background: #181f22;
+color: #fff;
+border: 2px solid #00fff0;
+border-radius: 20px;
+padding: 8px 18px;
+cursor: pointer;
+font-size: 1.08em;
+font-weight: 700;
+transition: all 0.3s ease;
+letter-spacing: 0.4px;
+margin-bottom: 4px;
 }
 .filtros-gen .tag-btn:hover, .filtros-gen .tag-btn.active {
-  background-color: #00b4d8;
-  color: #fff;
+background-color: #00b4d8;
+color: #fff;
 }
 
 /* ====== CATÁLOGO ====== */
 #catalogo {
-  margin-top: 36px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 22px;
-  justify-content: center;
+margin-top: 36px;
+display: flex;
+flex-wrap: wrap;
+gap: 22px;
+justify-content: center;
 }
 .card {
-  background: #1a1a1a;
-  border-radius: 18px;
-  padding: 14px 10px 10px 10px;
-  width: 210px;
-  min-height: 262px;
-  box-shadow: 0 4px 14px rgba(0, 255, 240, 0.09);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  border: 3px solid #00fff0;
-  transition: transform 0.3s;
+background: #1a1a1a;
+border-radius: 18px;
+padding: 14px 10px 10px 10px;
+width: 210px;
+min-height: 262px;
+box-shadow: 0 4px 14px rgba(0, 255, 240, 0.09);
+text-align: center;
+display: flex;
+flex-direction: column;
+position: relative;
+overflow: hidden;
+border: 3px solid #00fff0;
+transition: transform 0.3s;
 }
 .card.playing { box-shadow: 0 0 12px 4px #00ffff80; transform: scale(1.06);}
 .card img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  height: auto;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 2px solid #00FFF0;
-  display: block;
-  cursor: pointer;
-  transition: opacity 0.3s;
-  background: #222;
+width: 100%;
+aspect-ratio: 1 / 1;
+height: auto;
+object-fit: cover;
+border-radius: 12px;
+border: 2px solid #00FFF0;
+display: block;
+cursor: pointer;
+transition: opacity 0.3s;
+background: #222;
 }
 .card.playing img { opacity: 0.55; }
 .card h2 { margin: 10px 0 2px; font-size: 16px; color: #ffffff; }
@@ -282,44 +282,44 @@ body {
 
 /* ====== PAGINACION ====== */
 #paginacion {
-  text-align: center;
-  margin: 18px 0 30px 0;
+text-align: center;
+margin: 18px 0 30px 0;
 }
 #paginacion button {
-  background: #101d23;
-  color: #00fff0;
-  border: 1.5px solid #00fff0;
-  border-radius: 6px;
-  padding: 4px 13px;
-  margin: 0 1.5px;
-  font-size: 1em;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background .18s;
+background: #101d23;
+color: #00fff0;
+border: 1.5px solid #00fff0;
+border-radius: 6px;
+padding: 4px 13px;
+margin: 0 1.5px;
+font-size: 1em;
+font-weight: 600;
+cursor: pointer;
+transition: background .18s;
 }
 #paginacion button:hover {
-  background: #00fff011;
+background: #00fff011;
 }
 
 /* ====== RESPONSIVE ====== */
 @media (max-width: 1200px) {
-  .layout-main { max-width: 100vw; }
+.layout-main { max-width: 100vw; }
 }
 @media (max-width: 950px) {
-  .layout-main { flex-direction: column; align-items: stretch; padding: 14px 0 0 0; gap:18px;}
-  .bienvenida-block { margin: 0 0 22px 0; }
-  #playlist-topbar { position: static; width: 100%; margin: 10px auto 14px auto; }
+.layout-main { flex-direction: column; align-items: stretch; padding: 14px 0 0 0; gap:18px;}
+.bienvenida-block { margin: 0 0 22px 0; }
+#playlist-topbar { position: static; width: 100%; margin: 10px auto 14px auto; }
 }
 @media (max-width: 650px) {
-  .header-bar { flex-direction: column; align-items: flex-start; padding: 8px 0 7px 9px; }
-  .logo-casa img { height: 60px; margin-right: 0; }
-  .menu-nav { gap: 10px; margin-top: 9px;}
-  .bienvenida-block { max-width: 100vw; min-width: 0;}
-  .bienvenida-content { padding: 10px 7px 7px 9px;}
-  #playlist-topbar { padding: 9px 4px 7px 7px; min-width: 0;}
-  .playlist-img { width: 34px; height: 34px;}
-  #catalogo { gap: 13px; }
-  .card { width: 98vw; min-width: 0; max-width: 340px;}
+.header-bar { flex-direction: column; align-items: flex-start; padding: 8px 0 7px 9px; }
+.logo-casa img { height: 60px; margin-right: 0; }
+.menu-nav { gap: 10px; margin-top: 9px;}
+.bienvenida-block { max-width: 100vw; min-width: 0;}
+.bienvenida-content { padding: 10px 7px 7px 9px;}
+#playlist-topbar { padding: 9px 4px 7px 7px; min-width: 0;}
+.playlist-img { width: 34px; height: 34px;}
+#catalogo { gap: 13px; }
+.card { width: 98vw; min-width: 0; max-width: 340px;}
 }
 </style>
 </head>
@@ -327,51 +327,51 @@ body {
 
 <!-- ENCABEZADO CON LOGO Y MENÚ -->
 <div class="header-bar">
-  <div class="logo-casa">
-    <img src="https://catalogo.nyc3.digitaloceanspaces.com/ImagenesPagina/LOGO%20PAGINA.png" alt="Casa Music logo">
-  </div>
-  <div class="menu-nav">
-    <a class="active" onclick="mostrarSeccion('inicio')">Inicio</a>
-    <a onclick="mostrarSeccion('licencias')">Licencias</a>
-    <a onclick="mostrarSeccion('contacto')">Contacto</a>
-    <a onclick="mostrarSeccion('artistas')">Artistas</a>
-  </div>
+<div class="logo-casa">
+<img src="https://catalogo.nyc3.digitaloceanspaces.com/ImagenesPagina/LOGO%20PAGINA.png" alt="Casa Music logo">
+</div>
+<div class="menu-nav">
+<a class="active" onclick="mostrarSeccion('inicio')">Inicio</a>
+<a onclick="mostrarSeccion('licencias')">Licencias</a>
+<a onclick="mostrarSeccion('contacto')">Contacto</a>
+<a onclick="mostrarSeccion('artistas')">Artistas</a>
+</div>
 </div>
 
 <!-- CONTENIDO PRINCIPAL (BLOQUES) -->
 <div class="layout-main">
-  <!-- BIENVENIDA -->
-  <div class="bienvenida-block">
-    <div class="bienvenida-content">
-      <h2>¡Bienvenido a Casa Music!</h2>
-      <p>Descarga música original para tus videos, streams y proyectos.</p>
-      <p>Rápido, fácil y sin reclamos de derechos.</p>
-      <ul class="mini-lista">
-        <li>Llena el <a href="https://docs.google.com/forms/d/e/1FAIpQLSdps8X0qeIWNxvOp60yaVzQmIVQrosYpixweUYlZc7LTOrtyA/viewform?usp=dialog" target="_blank">formulario</a>.</li>
-        <li>Da crédito correcto en tu video.</li>
-      </ul>
-      <p class="pequeno">Música <b>libre de derechos</b> solo para creadores registrados.<br>
-      ¿Dudas? <a href="mailto:casaazulrecord@gmail.com"><b>Contáctanos</b></a></p>
-    </div>
-  </div>
-  <!-- PLAYLISTS DESTACADAS -->
-  <div id="playlist-topbar">
-    <h4>Playlists destacadas</h4>
-    <div id="playlist-list"><div style='color:#bbb'>Cargando playlists...</div></div>
-  </div>
+<!-- BIENVENIDA -->
+<div class="bienvenida-block">
+<div class="bienvenida-content">
+<h2>¡Bienvenido a Casa Music!</h2>
+<p>Descarga música original para tus videos, streams y proyectos.</p>
+<p>Rápido, fácil y sin reclamos de derechos.</p>
+<ul class="mini-lista">
+<li>Llena el <a href="https://docs.google.com/forms/d/e/1FAIpQLSdps8X0qeIWNxvOp60yaVzQmIVQrosYpixweUYlZc7LTOrtyA/viewform?usp=dialog" target="_blank">formulario</a>.</li>
+<li>Da crédito correcto en tu video.</li>
+</ul>
+<p class="pequeno">Música <b>libre de derechos</b> solo para creadores registrados.<br>
+¿Dudas? <a href="mailto:casaazulrecord@gmail.com"><b>Contáctanos</b></a></p>
+</div>
+</div>
+<!-- PLAYLISTS DESTACADAS -->
+<div id="playlist-topbar">
+<h4>Playlists destacadas</h4>
+<div id="playlist-list"><div style='color:#bbb'>Cargando playlists...</div></div>
+</div>
 </div>
 
 <!-- BUSCADOR Y FILTROS -->
 <div style="max-width: 600px; margin: 0 auto; margin-top: 18px;">
-  <input type="text" id="busqueda" placeholder="Buscar música..." oninput="buscarCanciones()">
+<input type="text" id="busqueda" placeholder="Buscar música..." oninput="buscarCanciones()">
 </div>
 <div class="filtros-gen">
-  <button class="tag-btn" onclick="filtrarPorGenero('Lo-Fi')">Lo-Fi</button>
-  <button class="tag-btn" onclick="filtrarPorGenero('Sleep')">Sleep</button>
-  <button class="tag-btn" onclick="filtrarPorGenero('Ambient')">Ambient</button>
-  <button class="tag-btn" onclick="filtrarPorGenero('Phonk')">Phonk</button>
-  <button class="tag-btn" onclick="filtrarPorGenero('House')">House</button>
-  <button class="tag-btn" onclick="filtrarPorGenero('Dark Ambient')">Dark Ambient</button>
+<button class="tag-btn" onclick="filtrarPorGenero('Lo-Fi')">Lo-Fi</button>
+<button class="tag-btn" onclick="filtrarPorGenero('Sleep')">Sleep</button>
+<button class="tag-btn" onclick="filtrarPorGenero('Ambient')">Ambient</button>
+<button class="tag-btn" onclick="filtrarPorGenero('Phonk')">Phonk</button>
+<button class="tag-btn" onclick="filtrarPorGenero('House')">House</button>
+<button class="tag-btn" onclick="filtrarPorGenero('Dark Ambient')">Dark Ambient</button>
 </div>
 
 <!-- CATÁLOGO DE MÚSICA -->
@@ -380,77 +380,77 @@ body {
 
 <!-- SECCIONES OCULTAS -->
 <div id="licencias" class="tab-content" style="display:none;">
-  <div style="max-width: 700px; margin: 0 auto; background: #131b1e; border-radius: 15px; border: 3px solid #00fff0; box-shadow: 0 3px 22px #00fff022; padding: 34px 23px 29px 23px; margin-top:40px;">
-    <h1 style="color:#00fff0; font-size:1.6em; margin-bottom:10px; font-weight:900;">🎧 Licencias y Uso – Casa Music</h1>
-    <div style="color:#bdfcff; font-size:1.18em; margin-bottom:18px;">
-      Bienvenido a Casa Music, una plataforma de música libre de derechos diseñada especialmente para creadores de contenido. Al descargar y utilizar cualquiera de nuestras canciones, aceptas los términos descritos en esta sección.
-    </div>
-    <div style="margin-bottom:22px;">
-      <b style="color:#95ffdb;font-size:1.05em;">¿Qué puedes hacer con nuestra música?</b>
-      <ul style="margin:13px 0 7px 26px; color:#a6f7ff; font-size:1.05em;">
-        <li>✅ Usar la música en tus videos de YouTube, TikTok, Instagram, Facebook y Twitch.</li>
-        <li>✅ Monetizar tu contenido mientras uses la música correctamente acreditada.</li>
-        <li>✅ Descargar archivos en formato WAV y MP3 para usar en tus proyectos creativos.</li>
-        <li>✅ Usarla en proyectos comerciales, siempre y cuando esté visible el crédito correspondiente.</li>
-      </ul>
-    </div>
-    <div style="margin-bottom:22px;">
-      <b style="color:#ff9999;font-size:1.05em;">❌ Lo que no está permitido</b>
-      <ul style="margin:13px 0 7px 26px; color:#ff9999; font-size:1.05em;">
-        <li>🚫 Re-subir las canciones a plataformas de streaming (Spotify, Apple Music, etc.).</li>
-        <li>🚫 Re-distribuir la música como si fuera propia.</li>
-        <li>🚫 Usar las canciones sin acreditar al artista y a Casa Music.</li>
-        <li>🚫 Crear versiones, remixes o remezclas sin autorización.</li>
-      </ul>
-    </div>
-    <div style="margin-bottom:22px;">
-      <b style="color:#95ffdb;font-size:1.08em;">🛡️ Protección con Identifyy (Content ID)</b>
-      <p style="margin:7px 0 0 0;color:#bdfcff;font-size:1.05em;">
-        Toda nuestra música está registrada con Identifyy para proteger los derechos de los artistas. Si no acreditas correctamente el uso de las canciones, tu video puede ser reclamado automáticamente por Content ID.
-        <br><br>
-        <span style="color:#e7fda6"><b>Sin embargo, si sigues las instrucciones de atribución, tu video no será desmonetizado y quedará libre de reclamos.</b></span>
-      </p>
-    </div>
-    <div style="margin-bottom:22px;">
-      <b style="color:#95ffdb;font-size:1.08em;">📌 ¿Cómo dar el crédito correcto?</b>
-      <p style="margin:7px 0 9px 0; color:#bdfcff; font-size:1.05em;">
-        Agrega el siguiente texto en la descripción de tu video o publicación:
-      </p>
-      <div style="background:#101c21;border-radius:8px;padding:12px 16px;margin-bottom:7px;color:#bdfcff; font-size:1.06em; border-left: 4px solid #00fff0; font-family:monospace;">
+<div style="max-width: 700px; margin: 0 auto; background: #131b1e; border-radius: 15px; border: 3px solid #00fff0; box-shadow: 0 3px 22px #00fff022; padding: 34px 23px 29px 23px; margin-top:40px;">
+<h1 style="color:#00fff0; font-size:1.6em; margin-bottom:10px; font-weight:900;">🎧 Licencias y Uso – Casa Music</h1>
+<div style="color:#bdfcff; font-size:1.18em; margin-bottom:18px;">
+Bienvenido a Casa Music, una plataforma de música libre de derechos diseñada especialmente para creadores de contenido. Al descargar y utilizar cualquiera de nuestras canciones, aceptas los términos descritos en esta sección.
+</div>
+<div style="margin-bottom:22px;">
+<b style="color:#95ffdb;font-size:1.05em;">¿Qué puedes hacer con nuestra música?</b>
+<ul style="margin:13px 0 7px 26px; color:#a6f7ff; font-size:1.05em;">
+<li>✅ Usar la música en tus videos de YouTube, TikTok, Instagram, Facebook y Twitch.</li>
+<li>✅ Monetizar tu contenido mientras uses la música correctamente acreditada.</li>
+<li>✅ Descargar archivos en formato WAV y MP3 para usar en tus proyectos creativos.</li>
+<li>✅ Usarla en proyectos comerciales, siempre y cuando esté visible el crédito correspondiente.</li>
+</ul>
+</div>
+<div style="margin-bottom:22px;">
+<b style="color:#ff9999;font-size:1.05em;">❌ Lo que no está permitido</b>
+<ul style="margin:13px 0 7px 26px; color:#ff9999; font-size:1.05em;">
+<li>🚫 Re-subir las canciones a plataformas de streaming (Spotify, Apple Music, etc.).</li>
+<li>🚫 Re-distribuir la música como si fuera propia.</li>
+<li>🚫 Usar las canciones sin acreditar al artista y a Casa Music.</li>
+<li>🚫 Crear versiones, remixes o remezclas sin autorización.</li>
+</ul>
+</div>
+<div style="margin-bottom:22px;">
+<b style="color:#95ffdb;font-size:1.08em;">🛡️ Protección con Identifyy (Content ID)</b>
+<p style="margin:7px 0 0 0;color:#bdfcff;font-size:1.05em;">
+Toda nuestra música está registrada con Identifyy para proteger los derechos de los artistas. Si no acreditas correctamente el uso de las canciones, tu video puede ser reclamado automáticamente por Content ID.
+<br><br>
+<span style="color:#e7fda6"><b>Sin embargo, si sigues las instrucciones de atribución, tu video no será desmonetizado y quedará libre de reclamos.</b></span>
+</p>
+</div>
+<div style="margin-bottom:22px;">
+<b style="color:#95ffdb;font-size:1.08em;">📌 ¿Cómo dar el crédito correcto?</b>
+<p style="margin:7px 0 9px 0; color:#bdfcff; font-size:1.05em;">
+Agrega el siguiente texto en la descripción de tu video o publicación:
+</p>
+<div style="background:#101c21;border-radius:8px;padding:12px 16px;margin-bottom:7px;color:#bdfcff; font-size:1.06em; border-left: 4px solid #00fff0; font-family:monospace;">
 🎵 Música proporcionada por Casa Music<br>
 🎨 Artista: Lofi Blue Note<br>
 🎧 Canción: Lazy Couch Days<br>
 🔗 Playlist: https://www.casamusica.com/playlist-relax (reemplaza por el enlace correcto)
-      </div>
-      <span style="color:#e7fda6; font-size:.98em;"><b>💡 Importante:</b> si usas varias canciones, puedes repetir este formato por cada pista utilizada.</span>
-    </div>
-    <div>
-      <b style="color:#95ffdb;font-size:1.08em;">📝 Licencia estándar</b>
-      <p style="margin:8px 0 0 0; color:#bdfcff; font-size:1.04em;">
-        Tu descarga incluye una licencia no exclusiva, perpetua y libre de regalías para usar la canción en tus creaciones, siempre que sigas las reglas de atribución.
-        <br><br>
-        Para obtener licencias extendidas, exclusivas o para campañas publicitarias a gran escala, <a href="mailto:casaazulrecord@gmail.com" style="color:#00fff0">contáctanos directamente</a>.
-      </p>
-    </div>
-  </div>
+</div>
+<span style="color:#e7fda6; font-size:.98em;"><b>💡 Importante:</b> si usas varias canciones, puedes repetir este formato por cada pista utilizada.</span>
+</div>
+<div>
+<b style="color:#95ffdb;font-size:1.08em;">📝 Licencia estándar</b>
+<p style="margin:8px 0 0 0; color:#bdfcff; font-size:1.04em;">
+Tu descarga incluye una licencia no exclusiva, perpetua y libre de regalías para usar la canción en tus creaciones, siempre que sigas las reglas de atribución.
+<br><br>
+Para obtener licencias extendidas, exclusivas o para campañas publicitarias a gran escala, <a href="mailto:casaazulrecord@gmail.com" style="color:#00fff0">contáctanos directamente</a>.
+</p>
+</div>
+</div>
 </div>
 <div id="contacto" class="tab-content" style="display:none;">
-  <h1>Contacto</h1>
-  <p>Escríbenos a <a href="mailto:casaazulrecord@gmail.com">casaazulrecord@gmail.com</a></p>
+<h1>Contacto</h1>
+<p>Escríbenos a <a href="mailto:casaazulrecord@gmail.com">casaazulrecord@gmail.com</a></p>
 </div>
 <div id="artistas" class="tab-content" style="display:none;">
-  <h1>Artistas</h1>
-  <p>Próximamente...</p>
+<h1>Artistas</h1>
+<p>Próximamente...</p>
 </div>
 <div id="popupAviso" style="display:none;">
-  <p><strong>⚠️ ATENCIÓN:</strong> Evita infracciones en tu canal de YouTube.</p>
-  <ul>
-    <li>Da crédito correctamente al título de la canción y al artista correspondiente en la descripción de tu video o contenido.</li>
-    <li>Llena nuestro <a href="https://docs.google.com/forms/d/e/1FAIpQLSdps8X0qeIWNxvOp60yaVzQmIVQrosYpixweUYlZc7LTOrtyA/viewform?usp=dialog" target="_blank" style="color:#00fff0">formulario de uso</a> para registrar tu canal y permitirnos incluirlo en la lista blanca (whitelist).</li>
-    <li>Este proceso nos permite autorizar tu canal de forma oficial ante las plataformas y así evitar bloqueos, silencios o monetización por terceros.</li>
-  </ul>
-  <p>Si tienes dudas, contáctanos a: <a href="mailto:casaazulrecord@gmail.com">casaazulrecord@gmail.com</a></p>
-  <label><input type="checkbox" id="aceptaCondiciones"> Listo, Acepto las condiciones y estoy listo para usar el audio.</label>
+<p><strong>⚠️ ATENCIÓN:</strong> Evita infracciones en tu canal de YouTube.</p>
+<ul>
+<li>Da crédito correctamente al título de la canción y al artista correspondiente en la descripción de tu video o contenido.</li>
+<li>Llena nuestro <a href="https://docs.google.com/forms/d/e/1FAIpQLSdps8X0qeIWNxvOp60yaVzQmIVQrosYpixweUYlZc7LTOrtyA/viewform?usp=dialog" target="_blank" style="color:#00fff0">formulario de uso</a> para registrar tu canal y permitirnos incluirlo en la lista blanca (whitelist).</li>
+<li>Este proceso nos permite autorizar tu canal de forma oficial ante las plataformas y así evitar bloqueos, silencios o monetización por terceros.</li>
+</ul>
+<p>Si tienes dudas, contáctanos a: <a href="mailto:casaazulrecord@gmail.com">casaazulrecord@gmail.com</a></p>
+<label><input type="checkbox" id="aceptaCondiciones"> Listo, Acepto las condiciones y estoy listo para usar el audio.</label>
 </div>
 <script>
 // ========== PLAYLISTS DESTACADAS ==========
@@ -459,201 +459,224 @@ let playlistsSheet = [];
 let playlistsLoaded = false;
 
 async function cargarPlaylistsSheet() {
-  try {
-    const response = await fetch(PLAYLISTS_CSV_URL);
-    const csv = await response.text();
-    const data = Papa.parse(csv, { header: true }).data;
-    playlistsSheet = data.filter(row =>
-      row["Nombre"] && row["Portada"] && row["Numero de Canciones"] && row["URL SPOTIFY"]
-    );
-    playlistsLoaded = true;
-    mostrarPlaylistsRandomSheet();
-    setInterval(mostrarPlaylistsRandomSheet, 20000); // Cambia cada 20 seg
-  } catch (err) {
-    document.getElementById('playlist-list').innerHTML = "<div style='color:#ff8080'>No se pudieron cargar playlists.</div>";
-  }
+try {
+const response = await fetch(PLAYLISTS_CSV_URL);
+const csv = await response.text();
+const data = Papa.parse(csv, { header: true }).data;
+playlistsSheet = data.filter(row =>
+row["Nombre"] && row["Portada"] && row["Numero de Canciones"] && row["URL SPOTIFY"]
+);
+playlistsLoaded = true;
+mostrarPlaylistsRandomSheet();
+setInterval(mostrarPlaylistsRandomSheet, 20000); // Cambia cada 20 seg
+} catch (err) {
+document.getElementById('playlist-list').innerHTML = "<div style='color:#ff8080'>No se pudieron cargar playlists.</div>";
+}
 }
 function mostrarPlaylistsRandomSheet() {
-  const container = document.getElementById('playlist-list');
-  container.innerHTML = '';
-  if (!playlistsLoaded || playlistsSheet.length === 0) {
-    container.innerHTML = "<div style='color:#ff8080'>No hay playlists disponibles.</div>";
-    return;
-  }
-  let items = [...playlistsSheet];
-  let seleccionadas = [];
-  for (let i = 0; i < 3 && items.length > 0; i++) {
-    const idx = Math.floor(Math.random() * items.length);
-    seleccionadas.push(items[idx]);
-    items.splice(idx, 1);
-  }
-  seleccionadas.forEach(pl => {
-    const div = document.createElement('div');
-    div.className = 'playlist-row';
-    div.innerHTML = `
-      <img src="${pl["Portada"]}" class="playlist-img" alt="${pl["Nombre"]}">
-      <div class="playlist-info">
-        <div class="playlist-title">${pl["Nombre"]}</div>
-        <div class="playlist-songs">${pl["Numero de Canciones"]} canciones</div>
-      </div>
-    `;
-    div.onclick = () => window.open(pl["URL SPOTIFY"], '_blank');
-    container.appendChild(div);
-  });
+const container = document.getElementById('playlist-list');
+container.innerHTML = '';
+if (!playlistsLoaded || playlistsSheet.length === 0) {
+container.innerHTML = "<div style='color:#ff8080'>No hay playlists disponibles.</div>";
+return;
+}
+let items = [...playlistsSheet];
+let seleccionadas = [];
+for (let i = 0; i < 3 && items.length > 0; i++) {
+const idx = Math.floor(Math.random() * items.length);
+seleccionadas.push(items[idx]);
+items.splice(idx, 1);
+}
+seleccionadas.forEach(pl => {
+const div = document.createElement('div');
+div.className = 'playlist-row';
+div.innerHTML = `
+<img src="${pl["Portada"]}" class="playlist-img" alt="${pl["Nombre"]}">
+<div class="playlist-info">
+<div class="playlist-title">${pl["Nombre"]}</div>
+<div class="playlist-songs">${pl["Numero de Canciones"]} canciones</div>
+</div>
+`;
+div.onclick = () => window.open(pl["URL SPOTIFY"], '_blank');
+container.appendChild(div);
+});
 }
 cargarPlaylistsSheet();
 
 // ========== CATALOGO DE MUSICA CON PAGINACION ==========
+
 let canciones = [], audioActual = null, cardActual = null, descargaActiva = null;
 let cancionesFiltradas = [];
 let paginaActual = 1;
 const cancionesPorPagina = 10;
 
-function mostrarSeccion(id) {
-  document.querySelectorAll('.tab-content').forEach(sec => sec.style.display = 'none');
-  if (id === 'inicio') {
-    document.getElementById('catalogo').style.display = '';
-    document.getElementById('paginacion').style.display = '';
-    document.querySelector('.layout-main').style.display = '';
-    document.getElementById('busqueda').parentElement.style.display = '';
-    document.querySelector('.filtros-gen').style.display = '';
-    paginaActual = 1;
-    mostrarAleatorias();
-  } else {
-    document.getElementById('catalogo').style.display = 'none';
-    document.getElementById('paginacion').style.display = 'none';
-    document.querySelector('.layout-main').style.display = 'none';
-    document.getElementById('busqueda').parentElement.style.display = 'none';
-    document.querySelector('.filtros-gen').style.display = 'none';
-    document.getElementById(id).style.display = 'block';
-  }
-  document.querySelectorAll('.menu-nav a').forEach(a => a.classList.remove('active'));
-  document.querySelector(`.menu-nav a[onclick*="${id}"]`).classList.add('active');
+// Mejoras búsqueda: quita tildes, busca por más campos, y soporta errores comunes de tipeo
+function quitarAcentos(str) {
+  return (str || '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
+function compararSimilitud(a, b) {
+  a = quitarAcentos(a.toLowerCase());
+  b = quitarAcentos(b.toLowerCase());
+  if (a.includes(b) || b.includes(a)) return true;
+  let dif = 0;
+  for (let i = 0; i < Math.min(a.length, b.length); i++) if (a[i] !== b[i]) dif++;
+  if (Math.abs(a.length - b.length) > 2) return false;
+  return dif <= 2;
+}
+
+function mostrarSeccion(id) {
+document.querySelectorAll('.tab-content').forEach(sec => sec.style.display = 'none');
+if (id === 'inicio') {
+document.getElementById('catalogo').style.display = '';
+document.getElementById('paginacion').style.display = '';
+document.querySelector('.layout-main').style.display = '';
+document.getElementById('busqueda').parentElement.style.display = '';
+document.querySelector('.filtros-gen').style.display = '';
+paginaActual = 1;
+mostrarAleatorias();
+} else {
+document.getElementById('catalogo').style.display = 'none';
+document.getElementById('paginacion').style.display = 'none';
+document.querySelector('.layout-main').style.display = 'none';
+document.getElementById('busqueda').parentElement.style.display = 'none';
+document.querySelector('.filtros-gen').style.display = 'none';
+document.getElementById(id).style.display = 'block';
+}
+document.querySelectorAll('.menu-nav a').forEach(a => a.classList.remove('active'));
+document.querySelector(`.menu-nav a[onclick*="${id}"]`).classList.add('active');
+}
+
 async function cargarCanciones() {
-  try {
-    const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSaml4sMmV59VPP9Cc25ZKitHWRjyxiOvExUrouRMDN4ZiA40QHbBGWrUv4xDJY5KOvujH2Cq-Dr1vf/pub?gid=842801860&single=true&output=csv';
-    const response = await fetch(url);
-    const csv = await response.text();
-    const data = Papa.parse(csv, { header: true }).data;
-    canciones = data.filter(c => c['Titulo'] && c['URL Audio MP3 Para Reproduccion']);
-    mostrarAleatorias();
-  } catch (error) {
-    console.error('Error cargando canciones:', error);
-    document.getElementById('catalogo').innerHTML = '<p style="text-align:center; color:red;">No se pudo cargar el catálogo.</p>';
-    document.getElementById('paginacion').innerHTML = '';
-  }
+try {
+const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSaml4sMmV59VPP9Cc25ZKitHWRjyxiOvExUrouRMDN4ZiA40QHbBGWrUv4xDJY5KOvujH2Cq-Dr1vf/pub?gid=842801860&single=true&output=csv';
+const response = await fetch(url);
+const csv = await response.text();
+const data = Papa.parse(csv, { header: true }).data;
+canciones = data.filter(c => c['Titulo'] && c['URL Audio MP3 Para Reproduccion']);
+mostrarAleatorias();
+} catch (error) {
+console.error('Error cargando canciones:', error);
+document.getElementById('catalogo').innerHTML = '<p style="text-align:center; color:red;">No se pudo cargar el catálogo.</p>';
+document.getElementById('paginacion').innerHTML = '';
+}
 }
 function mostrarAleatorias() {
-  cancionesFiltradas = canciones.sort(() => 0.5 - Math.random()).slice(0, 10);
-  paginaActual = 1;
-  renderizarCatalogoPaginado();
+cancionesFiltradas = canciones.sort(() => 0.5 - Math.random()).slice(0, 10);
+paginaActual = 1;
+renderizarCatalogoPaginado();
 }
 function filtrarPorGenero(genero) {
-  cancionesFiltradas = canciones.filter(c =>
-    c['Genero Principal']?.toLowerCase().includes(genero.toLowerCase()) ||
-    c['Genero 2']?.toLowerCase().includes(genero.toLowerCase())
-  );
-  paginaActual = 1;
-  renderizarCatalogoPaginado();
+cancionesFiltradas = canciones.filter(c =>
+c['Genero Principal']?.toLowerCase().includes(genero.toLowerCase()) ||
+c['Genero 2']?.toLowerCase().includes(genero.toLowerCase())
+);
+paginaActual = 1;
+renderizarCatalogoPaginado();
 }
+
+// FUNCIÓN DE BÚSQUEDA MEJORADA
 function buscarCanciones() {
-  const termino = document.getElementById('busqueda').value.toLowerCase();
-  if (!termino.trim()) return mostrarAleatorias();
-  cancionesFiltradas = canciones.filter(c =>
-    c['Titulo']?.toLowerCase().includes(termino) ||
-    c['Artista']?.toLowerCase().includes(termino) ||
-    c['Genero Principal']?.toLowerCase().includes(termino) ||
-    c['Genero 2']?.toLowerCase().includes(termino)
-  );
+  const termino = quitarAcentos(document.getElementById('busqueda').value.toLowerCase().trim());
+  if (!termino) return mostrarAleatorias();
+  cancionesFiltradas = canciones.filter(c => {
+    const campos = [
+      'Titulo', 'Artista', 'Genero Principal', 'Genero 2',
+      'Palabras Clave', 'Palabra Clave 2', 'Palabra Clave 3', 'Tags Genero'
+    ];
+    return campos.some(campo => {
+      const valor = quitarAcentos((c[campo] || '').toLowerCase());
+      return valor.includes(termino) || compararSimilitud(valor, termino);
+    });
+  });
   paginaActual = 1;
   renderizarCatalogoPaginado();
 }
+
 function renderizarCatalogoPaginado() {
-  const catalogo = document.getElementById('catalogo');
-  catalogo.innerHTML = '';
-  const inicio = (paginaActual - 1) * cancionesPorPagina;
-  const fin = inicio + cancionesPorPagina;
-  const cancionesPagina = cancionesFiltradas.slice(inicio, fin);
-  cancionesPagina.forEach(cancion => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    const audioId = 'audio_' + Math.random().toString(36).substr(2, 9);
-    const downloadLink = cancion['URL Audio WAV Para Descarga'];
-    card.innerHTML = `
-      <img src="${cancion['URL Portada'] || 'https://via.placeholder.com/180'}" alt="${cancion['Titulo']}" onclick="reproducirAudio('${audioId}', this)">
-      <h2>${cancion['Titulo']}</h2>
-      <p>${cancion['Artista']}</p>
-      <audio id="${audioId}" src="${downloadLink}"></audio>
-      <a href="#" class="download-link" onclick="pedirDatos(event, '${downloadLink}')">Descarga</a>
-    `;
-    catalogo.appendChild(card);
-  });
-  renderizarPaginacion();
+const catalogo = document.getElementById('catalogo');
+catalogo.innerHTML = '';
+const inicio = (paginaActual - 1) * cancionesPorPagina;
+const fin = inicio + cancionesPorPagina;
+const cancionesPagina = cancionesFiltradas.slice(inicio, fin);
+cancionesPagina.forEach(cancion => {
+const card = document.createElement('div');
+card.className = 'card';
+const audioId = 'audio_' + Math.random().toString(36).substr(2, 9);
+const downloadLink = cancion['URL Audio WAV Para Descarga'];
+card.innerHTML = `
+<img src="${cancion['URL Portada'] || 'https://via.placeholder.com/180'}" alt="${cancion['Titulo']}" onclick="reproducirAudio('${audioId}', this)">
+<h2>${cancion['Titulo']}</h2>
+<p>${cancion['Artista']}</p>
+<audio id="${audioId}" src="${downloadLink}"></audio>
+<a href="#" class="download-link" onclick="pedirDatos(event, '${downloadLink}')">Descarga</a>
+`;
+catalogo.appendChild(card);
+});
+renderizarPaginacion();
 }
 function renderizarPaginacion() {
-  const pagDiv = document.getElementById('paginacion');
-  const totalCanciones = cancionesFiltradas.length;
-  const totalPaginas = Math.ceil(totalCanciones / cancionesPorPagina);
+const pagDiv = document.getElementById('paginacion');
+const totalCanciones = cancionesFiltradas.length;
+const totalPaginas = Math.ceil(totalCanciones / cancionesPorPagina);
 
-  if (totalPaginas <= 1) {
-    pagDiv.innerHTML = '';
-    return;
-  }
-  let html = `<span style="margin-right:8px;">Página ${paginaActual} de ${totalPaginas}</span>`;
-  if (paginaActual > 1) {
-    html += `<button onclick="cambiarPagina(${paginaActual-1})" style="margin-right:4px;">Anterior</button>`;
-  }
-  let start = Math.max(1, paginaActual - 2);
-  let end = Math.min(totalPaginas, paginaActual + 2);
-  for (let i = start; i <= end; i++) {
-    if (i === paginaActual) {
-      html += `<span style="margin:0 3px;font-weight:700;color:#00fff0;">${i}</span>`;
-    } else {
-      html += `<button onclick="cambiarPagina(${i})" style="margin:0 3px;">${i}</button>`;
-    }
-  }
-  if (paginaActual < totalPaginas) {
-    html += `<button onclick="cambiarPagina(${paginaActual+1})" style="margin-left:4px;">Siguiente</button>`;
-  }
-  pagDiv.innerHTML = html;
+if (totalPaginas <= 1) {
+pagDiv.innerHTML = '';
+return;
+}
+let html = `<span style="margin-right:8px;">Página ${paginaActual} de ${totalPaginas}</span>`;
+if (paginaActual > 1) {
+html += `<button onclick="cambiarPagina(${paginaActual-1})" style="margin-right:4px;">Anterior</button>`;
+}
+let start = Math.max(1, paginaActual - 2);
+let end = Math.min(totalPaginas, paginaActual + 2);
+for (let i = start; i <= end; i++) {
+if (i === paginaActual) {
+html += `<span style="margin:0 3px;font-weight:700;color:#00fff0;">${i}</span>`;
+} else {
+html += `<button onclick="cambiarPagina(${i})" style="margin:0 3px;">${i}</button>`;
+}
+}
+if (paginaActual < totalPaginas) {
+html += `<button onclick="cambiarPagina(${paginaActual+1})" style="margin-left:4px;">Siguiente</button>`;
+}
+pagDiv.innerHTML = html;
 }
 function cambiarPagina(nuevaPag) {
-  paginaActual = nuevaPag;
-  renderizarCatalogoPaginado();
+paginaActual = nuevaPag;
+renderizarCatalogoPaginado();
 }
 function reproducirAudio(id, imgEl) {
-  const audio = document.getElementById(id);
-  const card = imgEl.closest('.card');
-  if (audioActual && audioActual !== audio) {
-    audioActual.pause();
-    audioActual.currentTime = 0;
-    if (cardActual) cardActual.classList.remove('playing');
-  }
-  if (audio.paused) {
-    audio.play();
-    card.classList.add('playing');
-    audioActual = audio;
-    cardActual = card;
-  } else {
-    audio.pause();
-    card.classList.remove('playing');
-    audioActual = null;
-    cardActual = null;
-  }
+const audio = document.getElementById(id);
+const card = imgEl.closest('.card');
+if (audioActual && audioActual !== audio) {
+audioActual.pause();
+audioActual.currentTime = 0;
+if (cardActual) cardActual.classList.remove('playing');
+}
+if (audio.paused) {
+audio.play();
+card.classList.add('playing');
+audioActual = audio;
+cardActual = card;
+} else {
+audio.pause();
+card.classList.remove('playing');
+audioActual = null;
+cardActual = null;
+}
 }
 function pedirDatos(e, urlDescarga) {
-  e.preventDefault();
-  document.getElementById('popupAviso').style.display = 'block';
-  descargaActiva = urlDescarga;
+e.preventDefault();
+document.getElementById('popupAviso').style.display = 'block';
+descargaActiva = urlDescarga;
 }
 document.addEventListener('change', function(e) {
-  if (e.target.id === 'aceptaCondiciones' && e.target.checked && descargaActiva) {
-    window.open(descargaActiva, '_blank');
-    document.getElementById('popupAviso').style.display = 'none';
-    e.target.checked = false;
-    descargaActiva = null;
-  }
+if (e.target.id === 'aceptaCondiciones' && e.target.checked && descargaActiva) {
+window.open(descargaActiva, '_blank');
+document.getElementById('popupAviso').style.display = 'none';
+e.target.checked = false;
+descargaActiva = null;
+}
 });
 cargarCanciones();
 </script>
