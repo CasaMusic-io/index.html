@@ -1,0 +1,84 @@
+<!DOCTYPE html>																									
+<html lang="es">																									
+<head>																									
+<title>Descargar canción – Casa Music</title>																									
+<meta name="viewport" content="width=device-width, initial-scale=1">																									
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">																									
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>																									
+<style>																									
+body { background: #0d0d0d; color: #fff; font-family: 'Inter', sans-serif; }																									
+.contenedor { max-width: 400px; margin: 40px auto; background: #181818; border-radius: 20px; padding: 24px; box-shadow: 0 2px 16px #0009;}																									
+.portada { width: 100%; border-radius: 12px; box-shadow: 0 2px 8px #0006;}																									
+.campo { margin: 12px 0; font-size: 1.1em; }																									
+.copiar { background: #111; border: 1px solid #333; border-radius: 8px; padding: 10px; margin: 8px 0; color: #fff; width: 100%; font-size: 1em; resize: none;}																									
+.btn { display: block; width: 100%; padding: 14px; background: #00fff0; color: #181818; font-weight: 600; border-radius: 14px; border: none; cursor: pointer; font-size: 1.2em; margin-top: 24px;}																									
+.btn-copiar { background: #222; color: #00fff0; border: 1px solid #00fff0; border-radius: 8px; padding: 7px 18px; font-size: 1em; cursor: pointer; transition: background .18s; margin-top: 5px;}																									
+.btn-copiar:hover { background: #00fff0; color: #181818; }																									
+.copiado { color: #8affb9; font-size: .96em; margin-top: 4px; }																									
+</style>																									
+</head>																									
+<body>																									
+<div class="contenedor" id="infoCancion">																									
+<div style="color:#bbb;">Cargando canción...</div>																									
+</div>																									
+<script>																									
+// URL pública de tu hoja Catalogo Publico (CSV)																									
+const CANCIONES_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSaml4sMmV59VPP9Cc25ZKitHWRjyxiOvExUrouRMDN4ZiA40QHbBGWrUv4xDJY5KOvujH2Cq-Dr1vf/pub?gid=842801860&single=true&output=csv';																									
+																									
+function getParam(name) {																									
+return new URLSearchParams(window.location.search).get(name);																									
+}																									
+const id = getParam('id') || "";																									
+																									
+fetch(CANCIONES_CSV)																									
+.then(r => r.text())																									
+.then(csv => {																									
+const data = Papa.parse(csv, { header: true }).data;																									
+																									
+// Hacer búsqueda flexible																									
+const idProcesado = (id || '').replace(/\s+/g, '').toLowerCase();																									
+const cancion = data.find(c => {																									
+const titulo = (c['Titulo'] || '');																									
+const tituloProcesado = titulo.replace(/\s+/g, '').toLowerCase();																									
+return tituloProcesado === idProcesado ||																									
+tituloProcesado.includes(idProcesado) ||																									
+idProcesado.includes(tituloProcesado);																									
+});																									
+																									
+if (cancion) {																									
+document.getElementById('infoCancion').innerHTML = `																									
+<img class="portada" src="${cancion['URL Portada'] || 'https://via.placeholder.com/300'}" alt="Portada">																									
+<div class="campo"><b>Artista:</b> ${cancion['Artista'] || '-'}</div>																									
+<div class="campo"><b>Canción:</b> ${cancion['Titulo'] || '-'}</div>																									
+<div class="campo"><b>Texto para copiar en tu video:</b></div>																									
+<textarea id="textoDerechos" class="copiar" rows="4" readonly>${cancion['Texto Para Derechos'] || ''}</textarea>																									
+<button class="btn-copiar" onclick="copiarTexto()">Copiar texto</button>																									
+<span id="mensajeCopiado"></span>																									
+<a href="${cancion['URL Audio WAV Para Descarga']}" download>																									
+<button class="btn">Descargar canción</button>																									
+</a>																									
+`;																									
+} else {																									
+// Debug: mostrar todos los títulos encontrados																									
+const encontrados = data.map(c => c['Titulo']).filter(Boolean).join('<br>');																									
+document.getElementById('infoCancion').innerHTML = `<div class="campo">No se encontró la canción.<br>																									
+<details><summary>Ver títulos disponibles</summary>${encontrados}</details></div>`;																									
+}																									
+}).catch(() => {																									
+document.getElementById('infoCancion').innerHTML = `<div class="campo" style="color:red;">Error cargando datos.</div>`;																									
+});																									
+																									
+// Función copiar texto																									
+function copiarTexto() {																									
+const textarea = document.getElementById('textoDerechos');																									
+textarea.select();																									
+textarea.setSelectionRange(0, 99999); // Para móviles																									
+document.execCommand("copy");																									
+document.getElementById('mensajeCopiado').innerHTML = "¡Texto copiado!";																									
+setTimeout(() => {																									
+document.getElementById('mensajeCopiado').innerHTML = "";																									
+}, 1800);																									
+}																									
+</script>																									
+</body>																									
+</html>			
