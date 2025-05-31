@@ -1,130 +1,84 @@
 <!DOCTYPE html>																									
 <html lang="es">																									
 <head>																									
-<meta charset="UTF-8">																									
-<title>Descarga tu canción | Casa Music</title>																									
+<title>Descargar canción – Casa Music</title>																									
 <meta name="viewport" content="width=device-width, initial-scale=1">																									
-<style>																									
-body {																									
-background: #101c21;																									
-color: #00fff0;																									
-font-family: 'Inter', sans-serif;																									
-min-height: 100vh;																									
-margin: 0;																									
-display: flex;																									
-flex-direction: column;																									
-justify-content: center;																									
-align-items: center;																									
-}																									
-.descarga-box {																									
-background: #181f22;																									
-border-radius: 18px;																									
-padding: 38px 28px 32px 28px;																									
-margin-top: 40px;																									
-box-shadow: 0 4px 24px #00fff044;																									
-border: 2.5px solid #00fff0;																									
-text-align: center;																									
-max-width: 98vw;																									
-}																									
-.descarga-box h2 {																									
-color: #00fff0;																									
-margin-bottom: 20px;																									
-font-size: 1.6em;																									
-}																									
-.descarga-box p {																									
-color: #bdfcff;																									
-font-size: 1.13em;																									
-margin-bottom: 15px;																									
-}																									
-#manualDownload {																									
-display: inline-block;																									
-background: #00fff0;																									
-color: #101c21;																									
-font-size: 1.3em;																									
-font-weight: bold;																									
-border-radius: 17px;																									
-padding: 16px 38px;																									
-margin: 18px 0 8px 0;																									
-text-decoration: none;																									
-box-shadow: 0 2px 12px #00fff033;																									
-transition: background .18s, color .18s;																									
-}																									
-#manualDownload:hover {																									
-background: #09e1d2;																									
-color: #101c21;																									
-}																									
-#iosMsg {																									
-display: none;																									
-color: #fffbbb;																									
-background: #222;																									
-border-radius: 10px;																									
-padding: 13px 17px;																									
-margin-top: 21px;																									
-font-size: 1.08em;																									
-}																									
-@media (max-width: 600px) {																									
-.descarga-box { padding: 16px 6px 20px 6px; }																									
-#manualDownload { font-size: 1.09em; padding: 11px 17px;}																									
-.descarga-box h2 { font-size: 1.1em;}																									
-}																									
-</style>																									
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">																									
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>																									
+<style>																									
+body { background: #0d0d0d; color: #fff; font-family: 'Inter', sans-serif; }																									
+.contenedor { max-width: 400px; margin: 40px auto; background: #181818; border-radius: 20px; padding: 24px; box-shadow: 0 2px 16px #0009;}																									
+.portada { width: 100%; border-radius: 12px; box-shadow: 0 2px 8px #0006;}																									
+.campo { margin: 12px 0; font-size: 1.1em; }																									
+.copiar { background: #111; border: 1px solid #333; border-radius: 8px; padding: 10px; margin: 8px 0; color: #fff; width: 100%; font-size: 1em; resize: none;}																									
+.btn { display: block; width: 100%; padding: 14px; background: #00fff0; color: #181818; font-weight: 600; border-radius: 14px; border: none; cursor: pointer; font-size: 1.2em; margin-top: 24px;}																									
+.btn-copiar { background: #222; color: #00fff0; border: 1px solid #00fff0; border-radius: 8px; padding: 7px 18px; font-size: 1em; cursor: pointer; transition: background .18s; margin-top: 5px;}																									
+.btn-copiar:hover { background: #00fff0; color: #181818; }																									
+.copiado { color: #8affb9; font-size: .96em; margin-top: 4px; }																									
+</style>																									
 </head>																									
 <body>																									
-<div class="descarga-box">																									
-<h2>Tu descarga debería comenzar automáticamente</h2>																									
-<p><b>Si no inicia en unos segundos, da clic aquí:</b></p>																									
-<a id="manualDownload" href="#" download>Descargar canción</a>																									
-<div id="iosMsg">																									
-<b>¿Usas iPhone o iPad?</b><br>																									
-Mantén presionado el botón "Descargar canción" y elige<br>																									
-<b>“Descargar archivo enlazado”</b> para guardar el audio.																									
+<div class="contenedor" id="infoCancion">																									
+<div style="color:#bbb;">Cargando canción...</div>																									
 </div>																									
-</div>																									
-																									
 <script>																									
-// Detección de iOS																									
-function esIOS() {																									
-return /iPad|iPhone|iPod/.test(navigator.userAgent);																									
-}																									
-if (esIOS()) document.getElementById('iosMsg').style.display = 'block';																									
+// URL pública de tu hoja Catalogo Publico (CSV)																									
+const CANCIONES_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSaml4sMmV59VPP9Cc25ZKitHWRjyxiOvExUrouRMDN4ZiA40QHbBGWrUv4xDJY5KOvujH2Cq-Dr1vf/pub?gid=842801860&single=true&output=csv';																									
 																									
-// Obtener el id de la canción de la URL																									
-function getQueryParam(name) {																									
-const params = new URLSearchParams(window.location.search);																									
-return params.get(name);																									
+function getParam(name) {																									
+return new URLSearchParams(window.location.search).get(name);																									
 }																									
-const idCancion = getQueryParam('id');																									
-const csvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSaml4sMmV59VPP9Cc25ZKitHWRjyxiOvExUrouRMDN4ZiA40QHbBGWrUv4xDJY5KOvujH2Cq-Dr1vf/pub?gid=842801860&single=true&output=csv';																									
+const id = getParam('id') || "";																									
 																									
-fetch(csvURL)																									
-.then(res => res.text())																									
+fetch(CANCIONES_CSV)																									
+.then(r => r.text())																									
 .then(csv => {																									
 const data = Papa.parse(csv, { header: true }).data;																									
-const cancion = data.find(c => (c['Titulo'] || '').replace(/\s+/g, '').toLowerCase() === idCancion);																									
-if (cancion && cancion['URL Audio WAV Para Descarga']) {																									
-const url = cancion['URL Audio WAV Para Descarga'];																									
-const nombre = (cancion['Titulo'] || 'cancion') + '.wav';																									
-const a = document.getElementById('manualDownload');																									
-a.href = url;																									
-a.setAttribute('download', nombre);																									
 																									
-// Intentar descarga automática (solo en PC y Android)																									
-setTimeout(() => {																									
-if (!esIOS()) {																									
-const autoA = document.createElement('a');																									
-autoA.href = url;																									
-autoA.setAttribute('download', nombre);																									
-document.body.appendChild(autoA);																									
-autoA.click();																									
-document.body.removeChild(autoA);																									
-}																									
-}, 1100);																									
-} else {																									
-document.querySelector('.descarga-box h2').innerText = "No se encontró la canción para descargar.";																									
-document.getElementById('manualDownload').style.display = "none";																									
-}																									
+// Hacer búsqueda flexible																									
+const idProcesado = (id || '').replace(/\s+/g, '').toLowerCase();																									
+const cancion = data.find(c => {																									
+const titulo = (c['Titulo'] || '');																									
+const tituloProcesado = titulo.replace(/\s+/g, '').toLowerCase();																									
+return tituloProcesado === idProcesado ||																									
+tituloProcesado.includes(idProcesado) ||																									
+idProcesado.includes(tituloProcesado);																									
 });																									
+																									
+if (cancion) {																									
+document.getElementById('infoCancion').innerHTML = `																									
+<img class="portada" src="${cancion['URL Portada'] || 'https://via.placeholder.com/300'}" alt="Portada">																									
+<div class="campo"><b>Artista:</b> ${cancion['Artista'] || '-'}</div>																									
+<div class="campo"><b>Canción:</b> ${cancion['Titulo'] || '-'}</div>																									
+<div class="campo"><b>Texto para copiar en tu video:</b></div>																									
+<textarea id="textoDerechos" class="copiar" rows="4" readonly>${cancion['Texto Para Derechos'] || ''}</textarea>																									
+<button class="btn-copiar" onclick="copiarTexto()">Copiar texto</button>																									
+<span id="mensajeCopiado"></span>																									
+<a href="${cancion['URL Audio WAV Para Descarga']}" download>																									
+<button class="btn">Descargar canción</button>																									
+</a>																									
+`;																									
+} else {																									
+// Debug: mostrar todos los títulos encontrados																									
+const encontrados = data.map(c => c['Titulo']).filter(Boolean).join('<br>');																									
+document.getElementById('infoCancion').innerHTML = `<div class="campo">No se encontró la canción.<br>																									
+<details><summary>Ver títulos disponibles</summary>${encontrados}</details></div>`;																									
+}																									
+}).catch(() => {																									
+document.getElementById('infoCancion').innerHTML = `<div class="campo" style="color:red;">Error cargando datos.</div>`;																									
+});																									
+																									
+// Función copiar texto																									
+function copiarTexto() {																									
+const textarea = document.getElementById('textoDerechos');																									
+textarea.select();																									
+textarea.setSelectionRange(0, 99999); // Para móviles																									
+document.execCommand("copy");																									
+document.getElementById('mensajeCopiado').innerHTML = "¡Texto copiado!";																									
+setTimeout(() => {																									
+document.getElementById('mensajeCopiado').innerHTML = "";																									
+}, 1800);																									
+}																									
 </script>																									
 </body>																									
-</html>																										
+</html>																									
