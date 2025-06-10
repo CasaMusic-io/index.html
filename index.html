@@ -8,14 +8,14 @@
 <style>
 body { font-family: 'Inter', sans-serif; background-color: #0d0d0d; color: #fff; margin: 0; padding: 0; }
 .header-bar { display: flex; align-items: center; background: #181818; padding: 0 0 0 20px; min-height: 90px; border-bottom: 2px solid #00fff022; }
-.logo-casa img { height: 82px; width: auto; display: block; margin-right: 30px; max-width: 200px; }
+.logo-casa img { height: 82px; width: auto; display: block; margin-right: 30px; max-width: 200px; filter: drop-shadow(0 0 16px #00fff099);}
 .menu-nav { display: flex; gap: 38px; flex: 1; flex-wrap: wrap; }
 .menu-nav a { color: #fff; text-decoration: none; font-weight: 600; padding: 13px 23px 9px 23px; font-size: 1.19em; border-radius: 8px 8px 0 0; background: none; border-bottom: 4px solid transparent; transition: background .16s, color .16s, border-bottom .16s; cursor: pointer; margin-top: 12px; }
-.menu-nav a.active { background: #0d2227; color: #00fff0; border-bottom: 4px solid #00fff0; }
+.menu-nav a.active { background: #0d2227; color: #00fff0; border-bottom: 4px solid #00fff0; box-shadow: 0 0 12px #00fff088; }
 .menu-nav a:hover { color: #00fff0; }
 .layout-main { display: flex; max-width: 1180px; margin: 0 auto; padding: 28px 12px 0 12px; align-items: flex-start; gap: 28px; }
 .bienvenida-block { flex: 2.1; margin-top: 6px; min-width: 260px; max-width: 650px; }
-.bienvenida-content { background: linear-gradient(100deg, #10131a 60%, #101d23 100%); border-radius: 18px; box-shadow: 0 2px 22px 0 #00fff015; padding: 28px 28px 16px 28px; border: 3px solid #00fff0; margin-bottom: 18px; }
+.bienvenida-content { background: linear-gradient(100deg, #10131a 60%, #101d23 100%); border-radius: 18px; box-shadow: 0 2px 22px 0 #00fff015; padding: 28px 28px 16px 28px; border: 3px solid #00fff0; margin-bottom: 18px; box-shadow: 0 0 18px 0 #00fff088; }
 .bienvenida-content h2 { color: #00fff0; font-size: 1.28em; margin: 0 0 11px 0; font-weight: 700; }
 .bienvenida-content p { font-size: 1.13em; margin: 0 0 6px 0; color: #bdfcff; font-weight: 500; }
 .mini-lista { margin: 15px 0 7px 5px; padding: 0; list-style: none; color: #a6f7ff; font-size: 1.04em; }
@@ -24,19 +24,51 @@ body { font-family: 'Inter', sans-serif; background-color: #0d0d0d; color: #fff;
 .pequeno { font-size: 0.98em; color: #85b9c9; margin-top: 10px; margin-bottom: 0; }
 .bienvenida-content a { color: #00fff0; text-decoration: underline; font-weight: 500; }
 .bienvenida-content a:hover { color: #fff; text-shadow: 0 0 4px #00fff0cc; }
-#playlist-topbar { background: #181818; color: #fff; border-radius: 17px; box-shadow: 0 3px 24px #00fff044; padding: 16px 13px 11px 16px; width: 330px; max-width: 99vw; min-width: 210px; z-index: 100; border: 3px solid #00fff0; margin-top: 0; }
+#playlist-topbar { background: #181818; color: #fff; border-radius: 17px; box-shadow: 0 0 18px #00fff088; padding: 16px 13px 11px 16px; width: 330px; max-width: 99vw; min-width: 210px; z-index: 100; border: 3px solid #00fff0; margin-top: 0; }
 #playlist-topbar h4 { color: #00fff0; margin: 0 0 13px 0; font-size: 1.14em; font-weight: 700; letter-spacing: 0.2px; text-align: left; }
 .playlist-row { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; padding: 7px 2px 7px 2px; border-radius: 8px; cursor: pointer; transition: background 0.14s; }
 .playlist-row:hover { background: #00fff011; }
-.playlist-img { width: 49px; height: 49px; object-fit: cover; border-radius: 8px; border: 2px solid #00fff0; background: #222; }
+.playlist-img { width: 49px; height: 49px; object-fit: cover; border-radius: 8px; border: 2px solid #00fff0; background: #222; box-shadow: 0 0 6px #00fff088; }
 .playlist-info { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
 .playlist-title { font-size: 1.09em; font-weight: 600; color: #fff; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .playlist-songs { font-size: 13px; color: #aef8ee; font-weight: 500; }
-#busqueda { width: 100%; max-width: 480px; margin: 0 auto 23px auto; display: block; padding: 15px 18px; font-size: 17px; border-radius: 30px; border: 2.3px solid #00fff0; background-color: #181818; color: #fff; box-sizing: border-box; outline: none; transition: border .25s; margin-bottom: 21px; }
+#busqueda { width: 100%; max-width: 480px; margin: 0 auto 23px auto; display: block; padding: 15px 18px; font-size: 17px; border-radius: 30px; border: 2.3px solid #00fff0; background-color: #181818; color: #fff; box-sizing: border-box; outline: none; transition: border .25s; margin-bottom: 21px; box-shadow: 0 0 14px #00fff066; }
 #busqueda:focus { border-color: #00fff0; background: #192e2e; box-shadow: 0 0 0 2px #00fff066; }
 .filtros-gen { display: flex; gap: 14px; margin: 0 0 10px 0; justify-content: center; flex-wrap: wrap; }
-.filtros-gen .tag-btn { background: #181f22; color: #fff; border: 2px solid #00fff0; border-radius: 20px; padding: 8px 18px; cursor: pointer; font-size: 1.08em; font-weight: 700; transition: all 0.3s ease; letter-spacing: 0.4px; margin-bottom: 4px; }
-.filtros-gen .tag-btn:hover, .filtros-gen .tag-btn.active { background-color: #00b4d8; color: #fff; }
+.filtros-gen .tag-btn {
+  background: #181f22;
+  color: #fff;
+  border: 2.5px solid #00fff0;
+  border-radius: 32px;
+  padding: 6px 20px 6px 16px;
+  cursor: pointer;
+  font-size: 1.16em;
+  font-weight: 700;
+  transition: all 0.3s;
+  letter-spacing: 0.2px;
+  margin-bottom: 4px;
+  box-shadow: 0 0 12px #00fff088;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  min-width: 110px;
+}
+.filtros-gen .tag-btn img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #222;
+  border: 2px solid #00fff0;
+  box-shadow: 0 0 8px #00fff088;
+}
+.filtros-gen .tag-btn:hover,
+.filtros-gen .tag-btn.active {
+  background-color: #102c2e;
+  color: #00fff0;
+  box-shadow: 0 0 18px #00fff099;
+  border-color: #00fff0;
+}
 #catalogo { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; }
 .card { background: #1a1a1a; border-radius: 18px; padding: 14px 10px 10px 10px; width: 210px; min-height: 262px; box-shadow: 0 4px 14px rgba(0, 255, 240, 0.09); text-align: center; display: flex; flex-direction: column; position: relative; overflow: hidden; border: 3px solid #00fff0; transition: transform 0.3s; }
 .card.playing { box-shadow: 0 0 12px 4px #00ffff80; transform: scale(1.06);}
@@ -63,7 +95,7 @@ body { font-family: 'Inter', sans-serif; background-color: #0d0d0d; color: #fff;
 <!-- ENCABEZADO CON LOGO Y MENÚ -->
 <div class="header-bar">
   <div class="logo-casa">
-    <img src="https://catalogo.nyc3.digitaloceanspaces.com/ImagenesPagina/LOGO%20PAGINA.png" alt="Casa Music logo">
+    <img src="https://catalogo.nyc3.cdn.digitaloceanspaces.com/ImagenesPagina/LogoCasaMusicio.png" alt="Casa Music logo">
   </div>
   <div class="menu-nav">
     <a class="active" onclick="mostrarSeccion('inicio')">Inicio</a>
@@ -99,18 +131,30 @@ body { font-family: 'Inter', sans-serif; background-color: #0d0d0d; color: #fff;
   <input type="text" id="busqueda" placeholder="Buscar música..." oninput="buscarCanciones()">
 </div>
 <div class="filtros-gen">
-  <button class="tag-btn" onclick="filtrarPorGenero('Lo-Fi')">Lo-Fi</button>
-  <button class="tag-btn" onclick="filtrarPorGenero('Sleep')">Sleep</button>
-  <button class="tag-btn" onclick="filtrarPorGenero('Ambient')">Ambient</button>
-  <button class="tag-btn" onclick="filtrarPorGenero('Phonk')">Phonk</button>
-  <button class="tag-btn" onclick="filtrarPorGenero('House')">House</button>
-  <button class="tag-btn" onclick="filtrarPorGenero('Dark Ambient')">Dark Ambient</button>
+  <button class="tag-btn" onclick="filtrarPorGenero('Lo-Fi')">
+    <img src="https://catalogo.nyc3.cdn.digitaloceanspaces.com/ImagenesPagina/LogosCirculares/LoFi.png" alt="Lo-Fi"> Lo-Fi
+  </button>
+  <button class="tag-btn" onclick="filtrarPorGenero('Sleep')">
+    <img src="https://catalogo.nyc3.cdn.digitaloceanspaces.com/ImagenesPagina/LogosCirculares/Sleep.png" alt="Sleep"> Sleep
+  </button>
+  <button class="tag-btn" onclick="filtrarPorGenero('Ambient')">
+    <img src="https://catalogo.nyc3.cdn.digitaloceanspaces.com/ImagenesPagina/LogosCirculares/Ambient.png" alt="Ambient"> Ambient
+  </button>
+  <button class="tag-btn" onclick="filtrarPorGenero('Phonk')">
+    <img src="https://catalogo.nyc3.cdn.digitaloceanspaces.com/ImagenesPagina/LogosCirculares/Phonk.png" alt="Phonk"> Phonk
+  </button>
+  <button class="tag-btn" onclick="filtrarPorGenero('House')">
+    <img src="https://catalogo.nyc3.cdn.digitaloceanspaces.com/ImagenesPagina/LogosCirculares/House.png" alt="House"> House
+  </button>
+  <button class="tag-btn" onclick="filtrarPorGenero('Dark Ambient')">
+    <img src="https://catalogo.nyc3.cdn.digitaloceanspaces.com/ImagenesPagina/LogosCirculares/DarckAmbient.png" alt="Dark Ambient"> Dark Ambient
+  </button>
 </div>
 <!-- CATÁLOGO DE MÚSICA -->
 <div id="catalogo"></div>
 <div id="paginacion"></div>
 
-<!-- SECCIONES OCULTAS (como tu diseño original) -->
+<!-- SECCIONES OCULTAS (igual que antes) -->
 <div id="licencias" class="tab-content" style="display:none;">
   <div style="max-width: 700px; margin: 0 auto; background: #131b1e; border-radius: 15px; border: 3px solid #00fff0; box-shadow: 0 3px 22px #00fff022; padding: 34px 23px 29px 23px; margin-top:40px;">
     <h1 style="color:#00fff0; font-size:1.6em; margin-bottom:10px; font-weight:900;">🎧 Licencias y Uso – Casa Music</h1>
@@ -401,7 +445,10 @@ document.addEventListener('change', function(e) {
     idCancionDescarga = null;
   }
 });
-cargarCanciones();
+</script>
+<script>
+  // Cargar canciones al iniciar
+  cargarCanciones();
 </script>
 </body>
 </html>
